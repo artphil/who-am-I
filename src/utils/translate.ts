@@ -129,7 +129,7 @@ const localization: Record<string, Record<string, string>> = {
   AGE: {
     en: 'Age',
     es: 'Edad',
-    pt: 'Idade',
+    pt: 'Era',
   },
   NEW_AGE: {
     en: 'New Age',
@@ -145,6 +145,31 @@ const localization: Record<string, Record<string, string>> = {
     en: 'Modern Age',
     es: 'Edad Moderna',
     pt: 'Era Moderna',
+  },
+  GAME_TITLE: {
+    en: 'Who Am I?',
+    es: '¿Quién Soy?',
+    pt: 'Quem Sou Eu?',
+  },
+  GAME_DESCRIPTION: {
+    en: 'Guess the character based on their traits and story.',
+    es: 'Adivina el personaje basado en sus características e historia.',
+    pt: 'Adivinhe o personagem com base em suas características e história.',
+  },
+  GAME_OVER_SUCCESS: {
+    en: 'Congratulations! You guessed correctly!',
+    es: '¡Felicidades! ¡Adivinaste correctamente!',
+    pt: 'Parabéns! Você adivinhou corretamente!',
+  },
+  GAME_OVER_FAILURE: {
+    en: 'Game Over! Better luck next time.',
+    es: '¡Juego Terminado! Mejor suerte la próxima vez.',
+    pt: 'Fim de Jogo! Melhor sorte na próxima vez.',
+  },
+  TRIES_LEFT: {
+    en: 'Tries Left',
+    es: 'Intentos Restantes',
+    pt: 'Tentativas Restantes',
   },
 }
 

@@ -5,7 +5,7 @@ import GameComponent from './components/GameComponent.vue';
 
 <template>
   <header>
-    <MainTitle title="Who am I?" />
+    <MainTitle />
   </header>
 
   <main>
