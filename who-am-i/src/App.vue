@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import MainTitle from './components/MainTitle.vue';
-import FailList from './components/FailList.vue';
+import GameComponent from './components/GameComponent.vue';
 </script>
 
 <template>
@@ -9,7 +9,7 @@ import FailList from './components/FailList.vue';
   </header>
 
   <main>
-    <FailList />
+    <GameComponent />
   </main>
 </template>
 

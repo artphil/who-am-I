@@ -1,18 +1,11 @@
 <script lang="ts">
+
 export default {
   name: 'FailList',
-  data() {
-    return {
-      inputValue: '',
-      words: [] as string[]
-    }
-  },
-  methods: {
-    addWord() {
-      if (this.inputValue.trim()) {
-        this.words.push(this.inputValue)
-        this.inputValue = ''
-      }
+  props: {
+    wrongList: {
+      type: [] as string[],
+      required: true,
     }
   }
 }
@@ -20,10 +13,8 @@ export default {
 
 <template>
   <div class="fail-list">
-    <input v-model="inputValue" @keyup.enter="addWord" type="text" placeholder="Digite uma palavra" />
-
     <ul>
-      <li v-for="(word, index) in words" :key="index">
+      <li v-for="(word, index) in wrongList" :key="index">
         {{ word }}
       </li>
     </ul>
@@ -33,10 +24,6 @@ export default {
 <style scoped>
 .fail-list {
   padding: 20px;
-}
-
-input {
-  padding: 8px;
 }
 
 ul {
