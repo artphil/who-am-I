@@ -1,4 +1,5 @@
         <script lang="ts">
+        import { t } from '@/utils/translate';
         import FeatureTag from './FeatureTag.vue';
 
         export default {
@@ -18,8 +19,17 @@
           },
           methods: {
             isCorrect(attr: string, value: string) {
-              return this.correctCharacter[attr]?.includes(value) || false;
+              const correctValue = this.correctCharacter[attr]
+              if (Array.isArray(correctValue)) {
+                return correctValue.includes(value)
+              }
+              return correctValue === value;
             },
+          },
+          data() {
+            return {
+              t
+            }
           }
         };
 </script>
@@ -27,7 +37,7 @@
 <template>
   <div class="person-perfil">
     <div class="perfil-header">
-      <h2>{{ selectedCharacter.name }}</h2>
+      <h2>{{ t(selectedCharacter.name) }}</h2>
     </div>
 
     <div class="perfil-content">
@@ -38,12 +48,17 @@
       <div class="perfil-attributes">
 
         <div class="attribute">
-          <span class="attribute-label">Gender:</span>
+          <span class="attribute-label">{{ t('GENDER') }}:</span>
           <FeatureTag :text="selectedCharacter.gender" :isCorrect="isCorrect('gender', selectedCharacter.gender)" />
         </div>
 
         <div class="attribute">
-          <span class="attribute-label">Features:</span>
+          <span class="attribute-label">{{ t('AGE') }}:</span>
+          <FeatureTag :text="selectedCharacter.age" :isCorrect="isCorrect('age', selectedCharacter.age)" />
+        </div>
+
+        <div class="attribute">
+          <span class="attribute-label">{{ t('FEATURE') }}:</span>
           <FeatureTag v-for="(value, key) in selectedCharacter.features" :key="key" :text="value"
             :isCorrect="isCorrect('features', value)" />
         </div>

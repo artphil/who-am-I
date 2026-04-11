@@ -19,7 +19,7 @@ const localization: Record<string, Record<string, string>> = {
   JACOB: {
     en: 'Jacob',
     es: 'Jacob',
-    pt: 'Jaco',
+    pt: 'Jacó',
   },
   MARY: {
     en: 'Mary',
@@ -115,6 +115,36 @@ const localization: Record<string, Record<string, string>> = {
     en: 'Female',
     es: 'Femenino',
     pt: 'Feminino',
+  },
+  GENDER: {
+    en: 'Gender',
+    es: 'Género',
+    pt: 'Gênero',
+  },
+  FEATURE: {
+    en: 'Feature',
+    es: 'Característica',
+    pt: 'Característica',
+  },
+  AGE: {
+    en: 'Age',
+    es: 'Edad',
+    pt: 'Idade',
+  },
+  NEW_AGE: {
+    en: 'New Age',
+    es: 'Nueva Edad',
+    pt: 'Nova Era',
+  },
+  OLD_AGE: {
+    en: 'Old Age',
+    es: 'Vieja Edad',
+    pt: 'Era Antiga',
+  },
+  MODERN_AGE: {
+    en: 'Modern Age',
+    es: 'Edad Moderna',
+    pt: 'Era Moderna',
   },
 }
 
