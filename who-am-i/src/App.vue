@@ -1,11 +1,20 @@
 <script setup lang="ts">
+import MainTitle from './components/MainTitle.vue';
 </script>
 
 <template>
   <header>
+    <MainTitle title="Who am I?" />
   </header>
 
   <main>
+    <input type="text" placeholder="Type your guess here..." />
+
+    <ol>
+      <li>Guess 1</li>
+      <li>Guess 2</li>
+      <li>Guess 3</li>
+    </ol>
   </main>
 </template>
 
@@ -17,6 +26,7 @@ header {
 @media (min-width: 1024px) {
   header {
     display: flex;
+    flex-direction: column;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
   }
