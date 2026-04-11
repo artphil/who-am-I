@@ -1,19 +1,22 @@
 <script lang="ts">
+import { persons } from '../utils/data';
 import NameSearch from './NameSearch.vue';
 import FailList from './FailList.vue';
+import PersonPerfil from './PersonPerfil.vue';
 
 export default {
   name: 'GameComponent',
   components: {
     NameSearch,
-    FailList
+    FailList,
+    PersonPerfil,
   },
   data() {
     return {
-      names: ['Alice', 'Bob', 'Charlie', 'Dave', 'Eve', 'Frank', 'Grace', 'Heidi', 'Ivan'],
+      names: persons.map(p => p.name),
       wrongNames: [] as string[],
-      correctName: 'Charlie',
-      lastSelectedName: '' as string,
+      correct: persons[Math.floor(Math.random() * persons.length)] || { name: '' },
+      lastSelected: {} as Object,
       isFinished: false,
     }
   },
@@ -24,12 +27,16 @@ export default {
       if (!this.names.includes(word)) { return }
       if (this.wrongNames.includes(word)) { return }
 
-      if (word === this.correctName) {
+      this.lastSelected = persons.find(p => p.name === word) || {};
+      if (word === this.correct?.name) {
         this.isFinished = true
         return
       }
 
       this.wrongNames.push(word)
+    },
+    hasSelected() {
+      return this.lastSelected && Object.keys(this.lastSelected).length > 0;
     }
   }
 }
@@ -38,7 +45,8 @@ export default {
 <template>
   <div class="game-component">
     <NameSearch :nameList="names" :wordHandler="checkWord" />
-    <span v-if="isFinished">You found the correct name: {{ correctName }}</span>
+    <span v-if="isFinished">You found the correct name: {{ correct.name }}</span>
+    <PersonPerfil v-if="hasSelected()" :correctCharacter="correct" :selectedCharacter="lastSelected" />
     <FailList :wrongList="wrongNames" />
   </div>
 </template>
