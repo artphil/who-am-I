@@ -101,6 +101,7 @@ const localization: Record<string, Record<string, string>> = {
   APOLLOS: { en: 'Apollonius', es: 'Apolonio', pt: 'Apólônio' },
   PHILEMON: { en: 'Philemon', es: 'Filemón', pt: 'Filemom' },
   ONESIMUS: { en: 'Onesimus', es: 'Onésimo', pt: 'Onésimo' },
+  JOSIAH: { en: 'Josiah', es: 'Josías', pt: 'Josías' },
 
   // FEATURES
   SACRIFICE: { en: 'Sacrifice', es: 'Sacrificio', pt: 'Sacrifício' },

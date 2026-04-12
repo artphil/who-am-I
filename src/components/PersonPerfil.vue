@@ -84,23 +84,6 @@
   color: #333;
 }
 
-.badge {
-  padding: 4px 12px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: bold;
-}
-
-.badge-correct {
-  background: #d4edda;
-  color: #155724;
-}
-
-.badge-incorrect {
-  background: #f8d7da;
-  color: #721c24;
-}
-
 .perfil-image {
   margin-bottom: 20px;
 }
@@ -118,6 +101,7 @@
 
 .attribute {
   display: flex;
+  flex-wrap: wrap;
   gap: 10px;
   padding: 8px 0;
   border-bottom: 1px solid #e0e0e0;
