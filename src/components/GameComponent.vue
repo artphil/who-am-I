@@ -5,6 +5,8 @@ import FailList from './FailList.vue';
 import PersonPerfil from './PersonPerfil.vue';
 import { t } from '@/utils/translate';
 import { MAX_WRONG_GUESSES } from '@/utils/constants';
+import { playerStorage } from '@/utils/storage';
+import GameStats from './GameStats.vue';
 
 export default {
   name: 'GameComponent',
@@ -12,6 +14,7 @@ export default {
     NameSearch,
     FailList,
     PersonPerfil,
+    GameStats
   },
   data() {
     const pickedPerson = persons[Math.floor(Math.random() * persons.length)] || { name: '' };
@@ -25,6 +28,7 @@ export default {
       isWin: false,
       t: t,
       max_tries: MAX_WRONG_GUESSES,
+      isModalOpen: false,
     }
   },
   methods: {
@@ -37,18 +41,40 @@ export default {
       this.lastSelected = persons.find(p => t(p.name) === word) || {};
 
       if (word === this.correctName) {
-        this.isFinished = true
-        this.isWin = true
+        this.gameOver();
         return
       }
 
       this.wrongNames.push(word)
       if (this.wrongNames.length >= this.max_tries) {
-        this.isFinished = true
+        this.gameOver();
       }
     },
     hasSelected() {
       return this.lastSelected && Object.keys(this.lastSelected).length > 0;
+    },
+    gameOver() {
+      this.isFinished = true;
+      this.isWin = this.wrongNames.length < this.max_tries;
+      const playerData = playerStorage.getData();
+      playerData.gamesPlayed += 1;
+      if (this.isWin) {
+        playerData.activeSequence += 1;
+        if (playerData.activeSequence > playerData.maxSequence) {
+          playerData.maxSequence = playerData.activeSequence;
+        }
+        const index = this.wrongNames.length;
+        if (playerData?.gamesWon?.length > index && typeof playerData.gamesWon[index] === 'number') {
+          playerData.gamesWon[index] += 1;
+        } else {
+          playerData.activeSequence = 0;
+        }
+      }
+      playerStorage.updateData(playerData);
+      this.isModalOpen = true;
+    },
+    closeModal() {
+      this.isModalOpen = false;
     }
   }
 }
@@ -63,6 +89,7 @@ export default {
     <PersonPerfil v-if="hasSelected()" :correctCharacter="correct" :selectedCharacter="lastSelected" />
     <FailList :wrongList="wrongNames" />
   </div>
+  <GameStats v-if="isModalOpen" :isOpen="isModalOpen" @close="closeModal" />
 </template>
 
 <style scoped>

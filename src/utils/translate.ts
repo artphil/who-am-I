@@ -171,6 +171,26 @@ const localization: Record<string, Record<string, string>> = {
     es: 'Intentos Restantes',
     pt: 'Tentativas Restantes',
   },
+  TOTAL_GAMES: {
+    en: 'Total Games',
+    es: 'Total de Juegos',
+    pt: 'Total de Jogos',
+  },
+  GAMES_WON: {
+    en: 'Games Won',
+    es: 'Juegos Ganados',
+    pt: 'Jogos Vencidos',
+  },
+  WIN_RATE: {
+    en: 'Win Rate',
+    es: 'Tasa de Victoria',
+    pt: 'Taxa de Vitória',
+  },
+  CHART_TITLE: {
+    en: 'Games Won by tries',
+    es: 'Juegos Ganados por intentos',
+    pt: 'Jogos Vencidos por tentativas',
+  },
 }
 
 function t(name: string): string {
