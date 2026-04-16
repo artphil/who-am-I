@@ -49,12 +49,12 @@
 
         <div class="attribute">
           <span class="attribute-label">{{ t('GENDER') }}:</span>
-          <FeatureTag :text="selectedCharacter.gender" :isCorrect="isCorrect('gender', selectedCharacter.gender)" />
+          <FeatureTag v-for="(value, key) in selectedCharacter.gender" :key="key" :text="value" :isCorrect="isCorrect('gender', selectedCharacter.gender)" />
         </div>
 
         <div class="attribute">
           <span class="attribute-label">{{ t('AGE') }}:</span>
-          <FeatureTag :text="selectedCharacter.age" :isCorrect="isCorrect('age', selectedCharacter.age)" />
+          <FeatureTag v-for="(value, key) in selectedCharacter.age" :key="key" :text="value" :isCorrect="isCorrect('age', selectedCharacter.age)" />
         </div>
 
         <div class="attribute">
