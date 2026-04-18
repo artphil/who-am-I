@@ -3,12 +3,19 @@ import { t } from '../utils/translate';
 </script>
 
 <template>
-  <h1 class="title">{{ t('GAME_TITLE') }}</h1>
-  <div class="wrapper">
-    <p class="description">
-      {{ t('GAME_DESCRIPTION') }}
-    </p>
+  <div class="title-container">
+    <h1 class="title">{{ t('GAME_TITLE') }}</h1>
+    <div class="wrapper">
+      <p class="description">
+        {{ t('GAME_DESCRIPTION') }}
+      </p>
+    </div>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.title-container {
+  display: flex;
+  flex-direction: column;
+}
+</style>

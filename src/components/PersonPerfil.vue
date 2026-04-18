@@ -1,11 +1,13 @@
         <script lang="ts">
         import { t } from '@/utils/translate';
         import FeatureTag from './FeatureTag.vue';
+        import PersonFeatures from './PersonFeatures.vue'
 
         export default {
           name: 'PersonPerfil',
           components: {
-            FeatureTag
+            FeatureTag,
+            PersonFeatures
           },
           props: {
             correctCharacter: {
@@ -24,6 +26,10 @@
                 return correctValue.includes(value)
               }
               return correctValue === value;
+            },
+            getFeatures() {
+              return Object.fromEntries(
+                Object.entries(this.selectedCharacter).filter(([key]) => key != 'id' && key != 'name'))
             },
           },
           data() {
@@ -46,22 +52,8 @@
       </div>
 
       <div class="perfil-attributes">
-
-        <div class="attribute">
-          <span class="attribute-label">{{ t('GENDER') }}:</span>
-          <FeatureTag v-for="(value, key) in selectedCharacter.gender" :key="key" :text="value" :isCorrect="isCorrect('gender', value)" />
-        </div>
-
-        <div class="attribute">
-          <span class="attribute-label">{{ t('AGE') }}:</span>
-          <FeatureTag v-for="(value, key) in selectedCharacter.age" :key="key" :text="value" :isCorrect="isCorrect('age', value)" />
-        </div>
-
-        <div class="attribute">
-          <span class="attribute-label">{{ t('FEATURE') }}:</span>
-          <FeatureTag v-for="(value, key) in selectedCharacter.features" :key="key" :text="value"
-            :isCorrect="isCorrect('features', value)" />
-        </div>
+        <PersonFeatures v-for="(value, key, index) in getFeatures()" :title="key" :features="value"
+          :correctFeatures="correctCharacter[key]" :key="index" />
       </div>
     </div>
   </div>
