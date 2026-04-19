@@ -57,6 +57,10 @@ export default {
       return this.lastSelected && Object.keys(this.lastSelected).length > 0;
     },
     gameOver() {
+      setTimeout(() => {
+        this.isModalOpen = true;
+      }, 2000);
+
       this.isFinished = true;
       this.isWin = this.wrongNames.length < this.max_tries;
       const playerData = playerStorage.getData();
@@ -69,12 +73,11 @@ export default {
         const index = this.wrongNames.length;
         if (playerData?.gamesWon?.length > index && typeof playerData.gamesWon[index] === 'number') {
           playerData.gamesWon[index] += 1;
-        } else {
-          playerData.activeSequence = 0;
         }
+      } else {
+        playerData.activeSequence = 0;
       }
       playerStorage.updateData(playerData);
-      this.isModalOpen = true;
     },
     closeModal() {
       this.isModalOpen = false;

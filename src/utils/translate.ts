@@ -51,6 +51,7 @@ const localization: Record<string, Record<string, string>> = {
   RAHAB: { en: 'Rahab', es: 'Rahab', pt: 'Raabe' },
   REBEKAH: { en: 'Rebekah', es: 'Rebeca', pt: 'Rebeca' },
   RUTH: { en: 'Ruth', es: 'Rut', pt: 'Rute' },
+  SAMUEL: { en: 'Samuel', es: 'Samuel', pt: 'Samuel' },
   SAMSON: { en: 'Samson', es: 'Sansón', pt: 'Sansão' },
   SARAH: { en: 'Sarah', es: 'Sara', pt: 'Sara' },
   SIMON_ZEALOT: { en: 'Simon the Zealot', es: 'Simón el Zelote', pt: 'Simão, o Zelote' },
@@ -284,6 +285,17 @@ const localization: Record<string, Record<string, string>> = {
   },
 
   // Game Stats
+  ACTUAL_SEQ: {
+    en: 'Current streak',
+    es: 'Racha actual',
+    pt: 'Sequência atual',
+  },
+
+  MAX_SEQ: {
+    en: 'Max streak',
+    es: 'Racha máxima',
+    pt: 'Sequência máxima',
+  },
   TOTAL_GAMES: {
     en: 'Total Games',
     es: 'Total de Juegos',

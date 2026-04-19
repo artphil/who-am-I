@@ -49,6 +49,8 @@ export default {
 
       <div class="modal-body">
         <div class="player-info">
+          <p><strong>{{ t('ACTUAL_SEQ') }}:</strong> {{ playerData.activeSequence }}</p>
+          <p><strong>{{ t('MAX_SEQ') }}:</strong> {{ playerData.maxSequence }}</p>
           <p><strong>{{ t('TOTAL_GAMES') }}:</strong> {{ playerData.gamesPlayed }}</p>
           <p><strong>{{ t('GAMES_WON') }}:</strong> {{playerData.gamesWon.reduce((a, b) => a + b, 0)}}</p>
           <p><strong>{{ t('WIN_RATE') }}:</strong> {{ winRate }}%</p>
