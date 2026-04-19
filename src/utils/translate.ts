@@ -207,7 +207,8 @@ const localization: Record<string, Record<string, string>> = {
 
   // Game UI
   GENDER: { en: 'Gender', es: 'Género', pt: 'Gênero' },
-  FEATURE: { en: 'Feature', es: 'Característica', pt: 'Característica' },
+  FEATURE: { en: 'Feature', es: 'Característica', pt: 'Características' },
+FEATURES: { en: 'Features', es: 'Características', pt: 'Característica' },
   AGE: { en: 'Age', es: 'Edad', pt: 'Era' },
   GAME_TITLE: { en: 'Who Am I?', es: '¿Quién Soy?', pt: 'Quem Sou Eu?' },
   INPUT_PLACEHOLDER: {
@@ -257,9 +258,9 @@ const localization: Record<string, Record<string, string>> = {
 
   // Game Messages
   GAME_DESCRIPTION: {
-    en: 'Guess the character based on their traits and story.',
-    es: 'Adivina el personaje basado en sus características e historia.',
-    pt: 'Adivinhe o personagem com base em suas características e história.',
+    en: 'Guess the character based on their traits.',
+    es: 'Adivina el personaje basado en sus características.',
+    pt: 'Adivinhe o personagem com base em suas características.',
   },
   GAME_OVER_SUCCESS: {
     en: 'Congratulations! You guessed correctly!',
