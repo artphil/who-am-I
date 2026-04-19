@@ -208,7 +208,7 @@ const localization: Record<string, Record<string, string>> = {
   // Game UI
   GENDER: { en: 'Gender', es: 'Género', pt: 'Gênero' },
   FEATURE: { en: 'Feature', es: 'Característica', pt: 'Características' },
-FEATURES: { en: 'Features', es: 'Características', pt: 'Característica' },
+  FEATURES: { en: 'Features', es: 'Características', pt: 'Característica' },
   AGE: { en: 'Age', es: 'Edad', pt: 'Era' },
   GAME_TITLE: { en: 'Who Am I?', es: '¿Quién Soy?', pt: 'Quem Sou Eu?' },
   INPUT_PLACEHOLDER: {
