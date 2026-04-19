@@ -38,7 +38,7 @@ const localization: Record<string, Record<string, string>> = {
   LAZARUS: { en: 'Lazarus', es: 'Lázaro', pt: 'Lázaro' },
   LOT: { en: 'Lot', es: 'Lot', pt: 'Ló' },
   MARTHA: { en: 'Martha', es: 'Marta', pt: 'Marta' },
-  MARY: { en: 'Mary', es: 'María', pt: 'Maria' },
+  MARY: { en: 'Mary (mother of Jesus)', es: 'María (madre de Jesús)', pt: 'Maria (mãe de Jesus)' },
   MARY_MAGDALENE: { en: 'Mary Magdalene', es: 'María Magdalena', pt: 'Maria Madalena' },
   MATTHEW: { en: 'Matthew', es: 'Mateo', pt: 'Mateus' },
   MIRIAM: { en: 'Miriam', es: 'Miriam', pt: 'Miriã' },
@@ -98,7 +98,7 @@ const localization: Record<string, Record<string, string>> = {
   LYDIA: { en: 'Lydia', es: 'Lidia', pt: 'Lídia' },
   PRISCILLA: { en: 'Priscilla', es: 'Priscila', pt: 'Priscila' },
   AQUILA: { en: 'Aquila', es: 'Aquila', pt: 'Aquila' },
-  APOLLOS: { en: 'Apollonius', es: 'Apolonio', pt: 'Apólônio' },
+  APOLLO: { en: 'Apollo', es: 'Apolo', pt: 'Apolo' },
   PHILEMON: { en: 'Philemon', es: 'Filemón', pt: 'Filemom' },
   ONESIMUS: { en: 'Onesimus', es: 'Onésimo', pt: 'Onésimo' },
   JOSIAH: { en: 'Josiah', es: 'Josías', pt: 'Josías' },
@@ -210,6 +210,50 @@ const localization: Record<string, Record<string, string>> = {
   FEATURE: { en: 'Feature', es: 'Característica', pt: 'Característica' },
   AGE: { en: 'Age', es: 'Edad', pt: 'Era' },
   GAME_TITLE: { en: 'Who Am I?', es: '¿Quién Soy?', pt: 'Quem Sou Eu?' },
+  INPUT_PLACEHOLDER: {
+    en: 'Type a name and press ENTER',
+    es: 'Escribe un nombre y presiona ENTER',
+    pt: 'Digite um nome e pressione ENTER',
+  },
+
+  // Game Help
+  HELP_TITLE: { en: 'How to Play', es: 'Cómo jugar', pt: 'Como Jogar' },
+
+  HELP_STEP_1: {
+    en: '1. Choose a character of your preference',
+    es: '1. Elige un personaje de tu preferencia',
+    pt: '1. Escolha um personagem de sua preferência',
+  },
+  HELP_STEP_2: {
+    en: '2. Check the feedback of the characteristics',
+    es: '2. Observa el feedback de las características',
+    pt: '2. Veja o feedback das características',
+  },
+  HELP_STEP_3: {
+    en: '3. Use the clues to find the correct one',
+    es: '3. Usa las pistas para llegar al correcto',
+    pt: '3. Use as pistas para chegar ao correto',
+  },
+
+  HELP_CORRECT: {
+    en: 'The character has this characteristic',
+    es: 'El personaje tiene esta característica',
+    pt: 'O personagem possui essa característica',
+  },
+  HELP_WRONG: {
+    en: 'The character does not have this characteristic',
+    es: 'El personaje no tiene esta característica',
+    pt: 'O personagem não possui essa característica',
+  },
+
+  HELP_TARGET: {
+    en: 'Guess the character in the fewest attempts.',
+    es: 'Adivina el personaje en el menor número de intentos.',
+    pt: 'Acerte o personagem no menor número de tentativas.',
+  },
+  CORRECT: { en: 'Correct', es: 'Correcto', pt: 'Correto' },
+  WRONG: { en: 'Wrong', es: 'Incorrecto', pt: 'Errado' },
+  FEEDBACK: { en: 'Feedback', es: 'Feedback', pt: 'Feedback' },
 
   // Game Messages
   GAME_DESCRIPTION: {
@@ -231,6 +275,11 @@ const localization: Record<string, Record<string, string>> = {
     en: 'Tries Left',
     es: 'Intentos Restantes',
     pt: 'Tentativas Restantes',
+  },
+  NOT_FOUND: {
+    en: 'Sorry, this character is not in our list. Try again.',
+    es: 'Lo sentimos, este personaje no está en nuestra lista. Inténtalo de nuevo.',
+    pt: 'Desculpe, este personagem não está na nossa lista. Tente novamente.',
   },
 
   // Game Stats

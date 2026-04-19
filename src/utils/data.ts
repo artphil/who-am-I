@@ -435,7 +435,7 @@ const persons = [
   },
   {
     id: '6d6d333a6395',
-    name: 'APOLLOS',
+    name: 'APOLLO',
     gender: ['MALE'],
     age: ['NEW_AGE'],
     features: ['CHARISMA', 'ENCOURAGEMENT', 'WISDOM'],

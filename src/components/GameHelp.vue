@@ -43,16 +43,26 @@ export default {
   <div class="modal-overlay" @click="closeModal">
     <div class="modal-content" @click.stop>
       <div class="modal-header">
-        <h2>Como jogar:</h2>
+        <h2>{{ t('HELP_TITLE') }}:</h2>
         <button class="close-btn" @click="closeModal">&times;</button>
       </div>
 
       <div class="modal-body">
-        <div class="player-info">
-          <p>Escolha um personagem bíblico para começar e digite o nome.</p>
-          <p>Com base nas características, tente adivinhar quem é o personagem misterioso.</p>
+        <div class="group-info">
+          <p>{{ t('HELP_STEP_1') }}</p>
+          <p>{{ t('HELP_STEP_2') }}</p>
+          <p>{{ t('HELP_STEP_3') }}</p>
+        </div>
 
-          <PersonFeatures :title="'FEATURES'" :features="['CORRECT', 'WRONG']" :correctFeatures="['CORRECT']" />
+        <div class="group-info">
+          <PersonFeatures :title="'FEEDBACK'" :features="['CORRECT', 'WRONG']" :correctFeatures="['CORRECT']" />
+          <p>{{ t('CORRECT') }} → {{ t('HELP_CORRECT') }}</p>
+          <p>{{ t('WRONG') }} → {{ t('HELP_WRONG') }}</p>
+        </div>
+
+        <div class="group-info">
+          <p>{{ t('HELP_TARGET') }}</p>
+
         </div>
 
       </div>
@@ -103,35 +113,8 @@ export default {
   padding: 20px;
 }
 
-.player-info {
-  margin-bottom: 30px;
-}
-
-.player-info p {
-  margin: 8px 0;
+.group-info {
+  margin: 0 8px 16px 0;
   font-size: 14px;
-}
-
-.chart-container {
-  margin-top: 20px;
-}
-
-.chart-container h3 {
-  margin-bottom: 15px;
-  font-size: 16px;
-}
-
-.chart {
-  width: 100%;
-  height: auto;
-}
-
-svg rect {
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-svg rect:hover {
-  opacity: 0.8;
 }
 </style>

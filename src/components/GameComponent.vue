@@ -35,7 +35,10 @@ export default {
     checkWord(word: string) {
       if (this.isFinished) { return }
       if (!word.trim()) { return }
-      if (!this.names.includes(word)) { return }
+      if (!this.names.includes(word)) {
+        alert(t('NOT_FOUND'));
+        return;
+      }
       if (this.wrongNames.includes(word)) { return }
 
       this.lastSelected = persons.find(p => t(p.name) === word) || {};
@@ -45,7 +48,7 @@ export default {
         return
       }
 
-      this.wrongNames.push(word)
+      this.wrongNames.unshift(word)
       if (this.wrongNames.length >= this.max_tries) {
         this.gameOver();
       }
@@ -82,9 +85,9 @@ export default {
 
 <template>
   <div class="game-component">
-    <NameSearch :nameList="names" :wordHandler="checkWord" />
-    <span v-if="isFinished && isWin">{{ t('GAME_OVER_SUCCESS') }}</span>
-    <span v-else-if="isFinished && !isWin">{{ t('GAME_OVER_FAILURE') }} <strong>{{ correctName }}</strong></span>
+    <NameSearch v-if="!isFinished" :nameList="names" :wordHandler="checkWord" />
+    <h3 v-if="isFinished && isWin">{{ t('GAME_OVER_SUCCESS') }}</h3>
+    <h3 v-else-if="isFinished && !isWin">{{ t('GAME_OVER_FAILURE') }} <strong>{{ correctName }}</strong></h3>
     <span v-else>{{ t('TRIES_LEFT') }}: {{ max_tries - wrongNames.length }} / {{ max_tries }}</span>
     <PersonPerfil v-if="hasSelected()" :correctCharacter="correct" :selectedCharacter="lastSelected" />
     <FailList :wrongList="wrongNames" />

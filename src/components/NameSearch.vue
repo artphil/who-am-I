@@ -1,4 +1,6 @@
 <script lang="ts">
+import { t } from '@/utils/translate';
+
 export default {
   name: 'NameSearch',
   props: {
@@ -16,6 +18,7 @@ export default {
       searchQuery: '',
       filteredNames: [] as string[],
       showDropdown: false,
+      t: t,
     }
   },
   methods: {
@@ -63,8 +66,8 @@ export default {
 
 <template>
   <div class="name-search">
-    <input v-model="searchQuery" type="text" placeholder="Digite um nome..." @input="filterNames" @blur="closeDropdown"
-      @focus="openDropdown" @keyup.enter="addWord" ref="searchInput" />
+    <input v-model="searchQuery" type="text" :placeholder="t('INPUT_PLACEHOLDER')" @input="filterNames"
+      @blur="closeDropdown" @focus="openDropdown" @keyup.enter="addWord" ref="searchInput" />
     <ul v-if="showDropdown && filteredNames.length" class="dropdown">
       <li v-for="name in filteredNames" :key="name" @click="selectName(name)">
         {{ name }}
