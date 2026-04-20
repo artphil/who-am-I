@@ -23,18 +23,17 @@ defineProps({
 .tag {
   display: inline-block;
   padding: 0.25rem 0.75rem;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   font-size: 0.875rem;
   font-weight: 500;
+  color: var(--color-heading);
 }
 
 .tag--correct {
-  background-color: #22c55e;
-  color: white;
+  background-color: var(--color-correct);
 }
 
 .tag--incorrect {
-  background-color: #ef4444;
-  color: white;
+  background-color: var(--color-wrong);
 }
 </style>

@@ -85,9 +85,15 @@ export default {
 input {
   width: 100%;
   padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
   font-size: 16px;
+  background: var(--color-background-modal);
+  color: var(--color-heading);
+}
+
+input:hover {
+  border-color: var(--color-border-hover);
 }
 
 .dropdown {
@@ -99,7 +105,7 @@ input {
   margin: 4px 0 0 0;
   padding: 0;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   background: white;
   color: black;
   max-height: 200px;

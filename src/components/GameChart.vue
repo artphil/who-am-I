@@ -35,9 +35,9 @@ export default {
     <h3>{{ t(title) }}</h3>
     <svg :viewBox="`0 0 ${chartWidth} ${chartHeight}`" class="chart">
       <!-- Eixo Y -->
-      <line x1="40" y1="20" x2="40" y2="280" stroke="#333" stroke-width="2" />
+      <line x1="40" y1="20" x2="40" y2="280" stroke-width="2" />
       <!-- Eixo X -->
-      <line x1="40" y1="280" x2="500" y2="280" stroke="#333" stroke-width="2" />
+      <line x1="40" y1="280" x2="500" y2="280" stroke-width="2" />
 
       <!-- Barras -->
       <g>
@@ -45,13 +45,13 @@ export default {
       </g>
       <g v-for="(game, index) in collumnValues" :key="index">
         <rect :x="50 + Number(index) * (collumnWidth + collumnGap)" :y="280 - (game * 2.6)" width="40"
-          :height="game * 2.6" fill="#4CAF50" @mouseover="hoveredBar = Number(index)" @mouseout="hoveredBar = null" />
+          :height="game * 2.6" @mouseover="hoveredBar = Number(index)" @mouseout="hoveredBar = null" />
         <text :x="70 + Number(index) * (collumnWidth + collumnGap)" :y="295" text-anchor="middle" font-size="12">
           {{ Number(index) + 1 }}
         </text>
         <!-- Tooltip -->
-        <text v-if="hoveredBar === index" :x="70 + Number(index) * (collumnWidth + collumnGap)" :y="300 - (game * 2.6)"
-          text-anchor="middle" font-size="16" fill="#ffffff">
+        <text class="tooltip-value" v-if="hoveredBar === index" :x="70 + Number(index) * (collumnWidth + collumnGap)"
+          :y="300 - (game * 2.6)" text-anchor="middle" font-size="16">
           {{ collumnData[index] }}
         </text>
       </g>
@@ -63,6 +63,7 @@ export default {
 .chart-container {
   margin-top: 20px;
   text-align: center;
+  background-color: var(--color-background-cards);
 }
 
 .chart {
@@ -70,5 +71,27 @@ export default {
   max-width: 500px;
   height: auto;
   margin: 0 auto;
+}
+
+line {
+  stroke: var(--color-border);
+}
+
+svg rect {
+  cursor: pointer;
+  transition: opacity 0.2s;
+  fill: var(--color-correct);
+}
+
+text {
+  fill: var(--color-text);
+}
+
+.tooltip-value {
+  fill: var(--color-heading);
+}
+
+svg rect:hover {
+  opacity: 0.8;
 }
 </style>

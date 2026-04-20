@@ -285,6 +285,11 @@ const localization: Record<string, Record<string, string>> = {
   },
 
   // Game Stats
+  PLAYER_STATS: {
+    en: 'Player Statistics',
+    es: 'Estadísticas del jugador',
+    pt: 'Estatísticas do Jogador',
+  },
   ACTUAL_SEQ: {
     en: 'Current streak',
     es: 'Racha actual',

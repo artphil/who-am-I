@@ -1,11 +1,11 @@
 <script lang="ts">
 import { persons } from '../utils/data';
-import NameSearch from './NameSearch.vue';
-import FailList from './FailList.vue';
-import PersonPerfil from './PersonPerfil.vue';
 import { t } from '@/utils/translate';
 import { MAX_WRONG_GUESSES } from '@/utils/constants';
 import { playerStorage } from '@/utils/storage';
+import NameSearch from './NameSearch.vue';
+import PersonPerfil from './PersonPerfil.vue';
+import FailList from './FailList.vue';
 import GameStats from './GameStats.vue';
 
 export default {

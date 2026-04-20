@@ -38,5 +38,7 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
 }
 </style>

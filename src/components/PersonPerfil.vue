@@ -1,12 +1,10 @@
         <script lang="ts">
         import { t } from '@/utils/translate';
-        import FeatureTag from './FeatureTag.vue';
         import PersonFeatures from './PersonFeatures.vue'
 
         export default {
           name: 'PersonPerfil',
           components: {
-            FeatureTag,
             PersonFeatures
           },
           props: {
@@ -62,10 +60,10 @@
 
 <style scoped>
 .person-perfil {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
   padding: 20px;
-  background: #f9f9f9;
+  background: var(--color-background-modal);
 }
 
 .perfil-header {
@@ -82,29 +80,12 @@
 
 .perfil-image img {
   max-width: 100%;
-  border-radius: 8px;
+  border-radius: var(--border-radius);
 }
 
 .perfil-attributes {
   display: grid;
   grid-template-columns: 1fr;
   gap: 12px;
-}
-
-.attribute {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid #e0e0e0;
-}
-
-.attribute-label {
-  font-weight: 600;
-  color: #333;
-}
-
-.attribute-value {
-  color: #666;
 }
 </style>

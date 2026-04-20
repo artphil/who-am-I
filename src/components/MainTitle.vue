@@ -6,9 +6,7 @@ import { t } from '../utils/translate';
   <div class="title-container">
     <h1 class="title">{{ t('GAME_TITLE') }}</h1>
     <div class="wrapper">
-      <p class="description">
-        {{ t('GAME_DESCRIPTION') }}
-      </p>
+      <p class="description"> {{ t('GAME_DESCRIPTION') }} </p>
     </div>
   </div>
 </template>
@@ -17,5 +15,12 @@ import { t } from '../utils/translate';
 .title-container {
   display: flex;
   flex-direction: column;
+}
+
+.wrapper {
+  padding: 8px 0;
+  display: flex;
+  place-items: flex-start;
+  flex-wrap: wrap;
 }
 </style>
