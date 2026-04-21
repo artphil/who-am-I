@@ -1,4 +1,5 @@
 <script lang="ts">
+import SearchIndex from '@/utils/search';
 import { t } from '@/utils/translate';
 
 export default {
@@ -15,6 +16,7 @@ export default {
   },
   data() {
     return {
+      search: new SearchIndex(this.nameList),
       searchQuery: '',
       filteredNames: [] as string[],
       showDropdown: false,
@@ -37,9 +39,7 @@ export default {
         return
       }
 
-      this.filteredNames = this.nameList.filter(name =>
-        name.toLowerCase().startsWith(query)
-      )
+      this.filteredNames = this.search.includes(query)
       this.openDropdown()
     },
     selectName(name: string) {
