@@ -6,8 +6,9 @@ import GameHelp from './components/GameHelp.vue';
 import Help from './assets/icons/HelpIcon.vue'
 import Chart from './assets/icons/ChartIcon.vue';
 import GameStats from './components/GameStats.vue';
+import { playerStorage } from './utils/storage';
 
-const isHelpModalOpen = ref(false);
+const isHelpModalOpen = ref(playerStorage.isNew);
 const isStatspModalOpen = ref(false);
 
 const openHelp = () => {

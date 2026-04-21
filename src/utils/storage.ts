@@ -11,6 +11,7 @@ class PlayerStorage {
   private static instance: PlayerStorage
   private data: PlayerData
   private readonly storageKey = 'wai_data'
+  public isNew = false
 
   private constructor() {
     this.data = this.loadFromStorage()
@@ -28,6 +29,7 @@ class PlayerStorage {
     if (stored) {
       return JSON.parse(stored)
     }
+    this.isNew = true
     const defaultData = this.createDefaultPlayerData()
     localStorage.setItem(this.storageKey, JSON.stringify(defaultData))
     return defaultData
