@@ -222,9 +222,9 @@ const localization: Record<string, Record<string, string>> = {
     pt: 'Tentativas Restantes',
   },
   NOT_FOUND: {
-    en: 'Sorry, this character is not in our list. Try again.',
-    es: 'Lo sentimos, este personaje no está en nuestra lista. Inténtalo de nuevo.',
-    pt: 'Desculpe, este personagem não está na nossa lista. Tente novamente.',
+    en: 'Sorry, {0} is not in our list. Try again.',
+    es: 'Lo sentimos, {0} no está en nuestra lista. Inténtalo de nuevo.',
+    pt: 'Desculpe, {0} não está na nossa lista. Tente novamente.',
   },
 
   // Game Stats
@@ -266,9 +266,15 @@ const localization: Record<string, Record<string, string>> = {
   },
 }
 
-function t(name: string): string {
+function t(name: string, args: string[] = []): string {
   const lang = locale.split('-')[0] || 'en'
-  return localization[name]?.[lang] || name
+  let message = localization[name]?.[lang] || name
+
+  args.forEach((arg, index) => {
+    message = message.replace(`{${index}}`, arg)
+  })
+
+  return message
 }
 
 export { t }

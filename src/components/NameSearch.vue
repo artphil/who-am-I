@@ -24,10 +24,11 @@ export default {
     }
   },
   methods: {
-    addWord() {
+    sendWord() {
       if (this.searchQuery.trim()) {
         this.wordHandler(this.searchQuery)
         this.searchQuery = ''
+        this.showDropdown = false
       }
     },
     filterNames() {
@@ -67,7 +68,7 @@ export default {
 <template>
   <div class="name-search">
     <input v-model="searchQuery" type="text" :placeholder="t('INPUT_PLACEHOLDER')" @input="filterNames"
-      @blur="closeDropdown" @focus="openDropdown" @keyup.enter="addWord" ref="searchInput" />
+      @blur="closeDropdown" @focus="openDropdown" @keyup.enter="sendWord" ref="searchInput" />
     <ul v-if="showDropdown && filteredNames.length" class="dropdown">
       <li v-for="name in filteredNames" :key="name" @click="selectName(name)">
         {{ name }}

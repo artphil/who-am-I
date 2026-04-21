@@ -29,6 +29,7 @@ export default {
       t: t,
       max_tries: MAX_WRONG_GUESSES,
       isModalOpen: false,
+      nameNotFound: '',
     }
   },
   methods: {
@@ -36,9 +37,11 @@ export default {
       if (this.isFinished) { return }
       if (!word.trim()) { return }
       if (!this.names.includes(word)) {
-        alert(t('NOT_FOUND'));
+        this.nameNotFound = word;
         return;
       }
+      this.nameNotFound = '';
+
       if (this.wrongNames.includes(word)) { return }
 
       this.lastSelected = persons.find(p => t(p[PERSON_NAME]) === word) || {};
@@ -89,6 +92,7 @@ export default {
 <template>
   <div class="game-component">
     <NameSearch v-if="!isFinished" :nameList="names" :wordHandler="checkWord" />
+    <span class="not-found" v-if="nameNotFound">{{ t('NOT_FOUND', [nameNotFound]) }}</span>
     <h3 v-if="isFinished && isWin">{{ t('GAME_OVER_SUCCESS') }}</h3>
     <h3 v-else-if="isFinished && !isWin">{{ t('GAME_OVER_FAILURE') }} <strong>{{ correctName }}</strong></h3>
     <span v-else>{{ t('TRIES_LEFT') }}: {{ max_tries - wrongNames.length }} / {{ max_tries }}</span>
@@ -107,8 +111,13 @@ span {
 }
 
 span strong {
-  color: var(--color-primary);
   text-decoration: underline;
   font-weight: bold;
+}
+
+.not-found {
+  color: var(--color-wrong);
+  font-size: 1.5em;
+  word-wrap: normal;
 }
 </style>
