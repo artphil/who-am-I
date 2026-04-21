@@ -1,4 +1,6 @@
         <script lang="ts">
+        import { PERSON_NAME } from '@/utils/constants';
+
         import { t } from '@/utils/translate';
         import PersonFeatures from './PersonFeatures.vue'
 
@@ -27,12 +29,13 @@
             },
             getFeatures() {
               return Object.fromEntries(
-                Object.entries(this.selectedCharacter).filter(([key]) => key != 'id' && key != 'name'))
+                Object.entries(this.selectedCharacter).filter(([key]) => !key.startsWith('_')))
             },
           },
           data() {
             return {
-              t
+              t,
+              PERSON_NAME,
             }
           }
         };
@@ -41,12 +44,12 @@
 <template>
   <div class="person-perfil">
     <div class="perfil-header">
-      <h2>{{ t(selectedCharacter.name) }}</h2>
+      <h2>{{ t(selectedCharacter[PERSON_NAME]) }}</h2>
     </div>
 
     <div class="perfil-content">
       <div v-if="selectedCharacter.image" class="perfil-image">
-        <img :src="selectedCharacter.image" :alt="selectedCharacter.name" />
+        <img :src="selectedCharacter.image" :alt="selectedCharacter[PERSON_NAME]" />
       </div>
 
       <div class="perfil-attributes">

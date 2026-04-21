@@ -1,7 +1,7 @@
 <script lang="ts">
 import { persons } from '../utils/data';
 import { t } from '@/utils/translate';
-import { MAX_WRONG_GUESSES } from '@/utils/constants';
+import { MAX_WRONG_GUESSES, PERSON_NAME } from '@/utils/constants';
 import { playerStorage } from '@/utils/storage';
 import NameSearch from './NameSearch.vue';
 import PersonPerfil from './PersonPerfil.vue';
@@ -17,12 +17,12 @@ export default {
     GameStats
   },
   data() {
-    const pickedPerson = persons[Math.floor(Math.random() * persons.length)] || { name: '' };
+    const pickedPerson = persons[Math.floor(Math.random() * persons.length)] || { [PERSON_NAME]: '' };
     return {
-      names: persons.map(p => t(p.name)),
+      names: persons.map(p => t(p[PERSON_NAME])),
       wrongNames: [] as string[],
       correct: pickedPerson,
-      correctName: t(pickedPerson.name),
+      correctName: t(pickedPerson[PERSON_NAME]),
       lastSelected: {} as Object,
       isFinished: false,
       isWin: false,
@@ -41,7 +41,7 @@ export default {
       }
       if (this.wrongNames.includes(word)) { return }
 
-      this.lastSelected = persons.find(p => t(p.name) === word) || {};
+      this.lastSelected = persons.find(p => t(p[PERSON_NAME]) === word) || {};
 
       if (word === this.correctName) {
         this.gameOver();

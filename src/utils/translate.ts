@@ -109,9 +109,12 @@ const localization: Record<string, Record<string, string>> = {
   MALE: { en: 'Male', es: 'Masculino', pt: 'Masculino' },
   UNKNOWN: { en: 'Unknown', es: 'Desconocido', pt: 'Desconhecido' },
 
-  NEW_AGE: { en: 'New Age', es: 'Nueva Edad', pt: 'Nova Era' },
-  MODERN_AGE: { en: 'Modern Age', es: 'Edad Moderna', pt: 'Era Moderna' },
-  OLD_AGE: { en: 'Old Age', es: 'Vieja Edad', pt: 'Era Antiga' },
+  ORIGINS: { en: 'Origins', pt: 'Origens', es: 'Orígenes' },
+  PATRIARCHS: { en: 'Patriarchs', pt: 'Patriarcas', es: 'Patriarcas' },
+  THEOCRACY: { en: 'Theocracy', pt: 'Teocracia', es: 'Teocracia' },
+  KINGS: { en: 'Kings', pt: 'Reis', es: 'Reyes' },
+  EXILE: { en: 'Exile', pt: 'Exílio', es: 'Exilio' },
+  REDEMPTION: { en: 'Redemption', pt: 'Redenção', es: 'Redención' },
 
   AMBITION: { en: 'Ambition', es: 'Ambición', pt: 'Ambição' },
   AUTHORITY: { en: 'Authority', es: 'Autoridad', pt: 'Autoridade' },
