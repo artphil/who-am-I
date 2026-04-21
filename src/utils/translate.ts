@@ -61,7 +61,7 @@ const localization: Record<string, Record<string, string>> = {
   TITUS: { en: 'Titus', es: 'Tito', pt: 'Tito' },
   THOMAS: { en: 'Thomas', es: 'Tomás', pt: 'Tomé' },
   ZEPHANIAH: { en: 'Zephaniah', es: 'Zefanías', pt: 'Zefanias' },
-  SAUL: { en: 'Saul', es: 'Saúl', pt: 'Saulo' },
+  SAUL: { en: 'Saul', es: 'Saúl', pt: 'Saul' },
   SHADRACH: { en: 'Shadrach', es: 'Sadrac', pt: 'Sadraque' },
   MESHACH: { en: 'Meshach', es: 'Mesac', pt: 'Mesaque' },
   ABEDNEGO: { en: 'Abednego', es: 'Abednego', pt: 'Abednego' },
