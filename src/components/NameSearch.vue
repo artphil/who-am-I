@@ -24,13 +24,6 @@ export default {
     }
   },
   methods: {
-    sendWord() {
-      if (this.searchQuery.trim()) {
-        this.wordHandler(this.searchQuery)
-        this.searchQuery = ''
-        this.showDropdown = false
-      }
-    },
     filterNames() {
       const query = this.searchQuery.toLowerCase().trim()
 
@@ -43,10 +36,15 @@ export default {
       this.filteredNames = this.search.includes(query)
       this.openDropdown()
     },
+    sendWord() {
+      if (this.searchQuery.trim()) {
+        this.selectName(this.searchQuery)
+      }
+    },
     selectName(name: string) {
-      this.searchQuery = name
+      this.searchQuery = ''
       this.showDropdown = false
-      this.$emit('name-selected', name)
+      this.wordHandler(name)
       this.$nextTick(() => {
         (this.$refs.searchInput as HTMLInputElement)?.focus()
       })
