@@ -1,4 +1,6 @@
-const locale = navigator.language || 'en-US'
+const aceptLanguages = ['en', 'es', 'pt']
+
+let locale: string
 
 const localization: Record<string, Record<string, string>> = {
   // PERSONAGENS
@@ -76,7 +78,7 @@ const localization: Record<string, Record<string, string>> = {
   JETHRO: { en: 'Jethro', es: 'Jetro', pt: 'Jetro' },
   PHARAOH: { en: 'Pharaoh', es: 'Faraón', pt: 'Faraó' },
   BALAAM: { en: 'Balaam', es: 'Balaam', pt: 'Balaão' },
-  KORAH: { en: 'Korah', es: 'Korah', pt: 'Korá' },
+  KORAH: { en: 'Korah', es: 'Coré', pt: 'Corá' },
   ACHAN: { en: 'Achan', es: 'Acan', pt: 'Acã' },
   DELILAH: { en: 'Delilah', es: 'Dalila', pt: 'Dalila' },
   BATHSHEBA: { en: 'Bathsheba', es: 'Betsabé', pt: 'Bate-Seba' },
@@ -160,7 +162,10 @@ const localization: Record<string, Record<string, string>> = {
     es: 'Escribe un nombre y presiona ENTER',
     pt: 'Digite um nome e pressione ENTER',
   },
-
+  LANGUAGE: { en: 'Language', es: 'Idioma', pt: 'Idioma' },
+  EN: { en: 'English', es: 'Inglés', pt: 'Inglês' },
+  ES: { en: 'Spanish', es: 'Español', pt: 'Espanhol' },
+  PT: { en: 'Portuguese', es: 'Portugués', pt: 'Português' },
   // Game Help
   HELP_TITLE: { en: 'How to Play', es: 'Cómo jugar', pt: 'Como Jogar' },
 
@@ -267,7 +272,7 @@ const localization: Record<string, Record<string, string>> = {
 }
 
 function t(name: string, args: string[] = []): string {
-  const lang = locale.split('-')[0] || 'en'
+  const lang = getLanguage()
   let message = localization[name]?.[lang] || name
 
   args.forEach((arg, index) => {
@@ -277,4 +282,24 @@ function t(name: string, args: string[] = []): string {
   return message
 }
 
-export { t }
+function setLanguage(lang: string): string {
+  if (lang) {
+    for (const l of aceptLanguages) {
+      if (lang.startsWith(l)) {
+        locale = l
+        return locale
+      }
+    }
+  }
+  locale = 'pt'
+  return locale
+}
+
+function getLanguage(): string {
+  if (!locale) {
+    setLanguage(navigator.language)
+  }
+  return locale
+}
+
+export { t, setLanguage, getLanguage, aceptLanguages }

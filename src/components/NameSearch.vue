@@ -105,10 +105,10 @@ input:hover {
   list-style: none;
   margin: 4px 0 0 0;
   padding: 0;
-  border: 1px solid #ccc;
+  border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  background: white;
-  color: black;
+  background: var(--color-background-modal);
+  color: var(--color-text);
   max-height: 200px;
   overflow-y: auto;
   z-index: 10;
@@ -120,6 +120,6 @@ input:hover {
 }
 
 .dropdown li:hover {
-  background-color: #f0f0f0;
+  background-color: var(--color-background-cards);
 }
 </style>
