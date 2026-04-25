@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { aceptLanguages, t } from '@/utils/translate';
-import Help from './assets/icons/HelpIcon.vue'
-import Chart from './assets/icons/ChartIcon.vue';
-import Menu from './assets/icons/MenuIcon.vue';
-import Language from './assets/icons/LanguageIcon.vue';
-import GameHelp from './components/GameHelp.vue';
-import GameStats from './components/GameStats.vue';
-import { playerStorage } from './utils/storage';
+import Help from '@/assets/icons/HelpIcon.vue'
+import Chart from '@/assets/icons/ChartIcon.vue';
+import Menu from '@/assets/icons/MenuIcon.vue';
+import Language from '@/assets/icons/LanguageIcon.vue';
+import GameHelp from '@/components/GameHelp.vue';
+import GameStats from '@/components/GameStats.vue';
+import { playerStorage } from '../utils/storage';
 
 const isHelpModalOpen = ref(playerStorage.isNew);
 const isStatspModalOpen = ref(false);
