@@ -66,8 +66,9 @@ export default {
 <template>
   <div class="name-search">
     <input v-model="searchQuery" type="text" :placeholder="t('INPUT_PLACEHOLDER')" @input="filterNames"
-      @blur="closeDropdown" @focus="openDropdown" @keyup.enter="sendWord" ref="searchInput" />
-    <ul v-if="showDropdown && filteredNames.length" class="dropdown">
+      @blur="closeDropdown" @focus="openDropdown" ref="searchInput" />
+    <ul v-if="showDropdown && searchQuery" class="dropdown">
+      <li v-if="!filteredNames.length">{{ t('NOT_FOUND') }}</li>
       <li v-for="name in filteredNames" :key="name" @click="selectName(name)">
         {{ name }}
       </li>

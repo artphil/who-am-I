@@ -316,7 +316,7 @@ const persons = [
   },
   {
     _id: '6d6d333a6395',
-    _name: 'APOLLOS',
+    _name: 'APOLLO',
     gender: ['MALE'],
     age: ['REDEMPTION'],
     features: ['ENCOURAGEMENT', 'HUMILITY', 'LEADERSHIP', 'WISDOM'],

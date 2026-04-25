@@ -158,9 +158,9 @@ const localization: Record<string, Record<string, string>> = {
   AGE: { en: 'Age', es: 'Edad', pt: 'Era' },
   GAME_TITLE: { en: 'Who Am I?', es: '¿Quién Soy?', pt: 'Quem Sou Eu?' },
   INPUT_PLACEHOLDER: {
-    en: 'Type a name and press ENTER',
-    es: 'Escribe un nombre y presiona ENTER',
-    pt: 'Digite um nome e pressione ENTER',
+    en: 'Type a name.',
+    es: 'Escribe un nombre.',
+    pt: 'Digite um nome.',
   },
   LANGUAGE: { en: 'Language', es: 'Idioma', pt: 'Idioma' },
   EN: { en: 'English', es: 'Inglés', pt: 'Inglês' },
@@ -227,9 +227,9 @@ const localization: Record<string, Record<string, string>> = {
     pt: 'Tentativas Restantes',
   },
   NOT_FOUND: {
-    en: 'Sorry, {0} is not in our list. Try again.',
-    es: 'Lo sentimos, {0} no está en nuestra lista. Inténtalo de nuevo.',
-    pt: 'Desculpe, {0} não está na nossa lista. Tente novamente.',
+    en: 'Sorry, this character is not in our list.',
+    es: 'Lo sentimos, este personaje no está en nuestra lista.',
+    pt: 'Desculpe, este personagem não está na nossa lista.',
   },
 
   // Game Stats
