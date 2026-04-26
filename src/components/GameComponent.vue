@@ -162,7 +162,7 @@ async function shareGame() {
 
   await navigator.clipboard.writeText(
     t('SHARE_MESSAGE', [
-      wrongList.value.length.toString(),
+      (wrongList.value.length+1).toString(),
       MAX_WRONG_GUESSES.toString(),
       t('GAME_TITLE'),
       url
