@@ -1,12 +1,38 @@
 <script lang="ts">
-import { persons } from '../utils/data';
+import { useRoute, useRouter } from 'vue-router';
+import { getById, getRandom, persons } from '../utils/data';
 import { t } from '@/utils/translate';
 import { MAX_WRONG_GUESSES, PERSON_NAME } from '@/utils/constants';
 import { playerStorage } from '@/utils/storage';
-import NameSearch from './NameSearch.vue';
-import PersonPerfil from './PersonPerfil.vue';
 import FailList from './FailList.vue';
 import GameStats from './GameStats.vue';
+import NameSearch from './NameSearch.vue';
+import PersonPerfil from './PersonPerfil.vue';
+
+
+function getCharacter() {
+  const router = useRouter()
+  const id = getCharacterId()
+  if (id) {
+    const character = getById(id)
+    if (character) {
+      return character
+    }
+    else {
+      router.replace('/')
+    }
+  }
+  return getRandom()
+}
+
+function getCharacterId(): string {
+  const route = useRoute()
+  const id = route.params.id
+  if (typeof id === 'string') {
+    return id
+  }
+  return ''
+}
 
 export default {
   name: 'GameComponent',
@@ -17,12 +43,18 @@ export default {
     GameStats
   },
   data() {
-    const pickedPerson = persons[Math.floor(Math.random() * persons.length)] || { [PERSON_NAME]: '' };
+    const pickedPerson = getCharacter();
+
+    if (!pickedPerson) {
+      const router = useRouter()
+      router.push('/404')
+    }
+
     return {
       names: persons.map(p => t(p[PERSON_NAME])),
       wrongNames: [] as string[],
-      correct: pickedPerson,
-      correctName: t(pickedPerson[PERSON_NAME]),
+      correct: pickedPerson || {},
+      correctName: pickedPerson ? t(pickedPerson[PERSON_NAME]) : '',
       lastSelected: {} as Object,
       isFinished: false,
       isWin: false,
@@ -93,7 +125,7 @@ export default {
     <h3 v-else-if="isFinished && !isWin">{{ t('GAME_OVER_FAILURE') }} <strong>{{ correctName }}</strong></h3>
     <span v-else>{{ t('TRIES_LEFT') }}: {{ max_tries - wrongNames.length }} / {{ max_tries }}</span>
     <PersonPerfil v-if="hasSelected()" :correctCharacter="correct" :selectedCharacter="lastSelected" />
-    <FailList :wrongList="wrongNames" />
+    <FailList v-if="wrongNames.length" :wrongList="wrongNames" />
   </div>
   <GameStats v-if="isModalOpen" :isOpen="isModalOpen" @close="closeModal" />
 </template>

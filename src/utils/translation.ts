@@ -115,4 +115,15 @@ export default {
     es: 'Lo sentimos, este personaje no está en nuestra lista.',
     pt: 'Desculpe, este personagem não está na nossa lista.',
   },
+  // Not Found
+  NOT_FOUND_PAGE: {
+    en: 'Page not found',
+    es: 'Página no encontrada',
+    pt: 'Página não encontrada',
+  },
+  BACK_HOME: {
+    en: 'Back to home',
+    es: 'Volver al inicio',
+    pt: 'Voltar para o início',
+  },
 }

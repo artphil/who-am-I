@@ -1,5 +1,7 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Game from '../views/Game.vue'
+import { createRouter, createWebHistory, type RouteLocationNormalized } from 'vue-router'
+import Game from '../views/GameView.vue'
+import { existis } from '@/utils/data'
+import NotFound from '@/views/NotFound.vue'
 
 const routes = [
   {
@@ -9,6 +11,14 @@ const routes = [
   {
     path: '/:id([a-fA-F0-9]{12})',
     component: Game,
+  },
+  {
+    path: '/404',
+    component: NotFound,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    redirect: '/',
   },
 ]
 
