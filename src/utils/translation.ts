@@ -58,6 +58,11 @@ export default {
   FEEDBACK: { en: 'Feedback', es: 'Feedback', pt: 'Feedback' },
 
   // Game Stats
+  STATS: {
+    en: 'Statistics',
+    es: 'Estadísticas',
+    pt: 'Estatísticas',
+  },
   PLAYER_STATS: {
     en: 'Player Statistics',
     es: 'Estadísticas del jugador',

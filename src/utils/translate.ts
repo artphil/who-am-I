@@ -1,5 +1,6 @@
 import theme_translation from '@/theme/translation'
 import default_translation from './translation'
+import { DEFAULT_LANGUAGE } from './constants'
 
 const aceptLanguages = ['en', 'es', 'pt']
 
@@ -30,7 +31,7 @@ function setLanguage(lang: string): string {
       }
     }
   }
-  locale = 'pt'
+  locale = DEFAULT_LANGUAGE
   return locale
 }
 

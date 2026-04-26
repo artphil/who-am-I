@@ -1,4 +1,4 @@
-import { MAX_WRONG_GUESSES } from './constants'
+import { DEFAULT_LANGUAGE, MAX_WRONG_GUESSES } from './constants'
 import { getLanguage, setLanguage } from './translate'
 
 export interface PlayerData {
@@ -6,18 +6,19 @@ export interface PlayerData {
   activeSequence: number
   maxSequence: number
   gamesWon: number[]
-  language: string
 }
 
 class PlayerStorage {
   private static instance: PlayerStorage
   private data: PlayerData
+  private language: string
   private readonly storageKey = 'wai_data'
+  private readonly languageKey = 'wai_lang'
   public isNew = false
 
   private constructor() {
     this.data = this.loadFromStorage()
-    setLanguage(this.data.language)
+    this.language = setLanguage(localStorage.getItem(this.languageKey) || '')
   }
 
   static getInstance(): PlayerStorage {
@@ -39,12 +40,12 @@ class PlayerStorage {
   }
 
   private createDefaultPlayerData(): PlayerData {
+    const language = getLanguage()
     return {
       gamesPlayed: 0,
       activeSequence: 0,
       maxSequence: 0,
       gamesWon: new Array(MAX_WRONG_GUESSES).fill(0),
-      language: getLanguage(),
     }
   }
 
@@ -66,8 +67,14 @@ class PlayerStorage {
     this.saveToStorage()
   }
 
+  getLang(): string {
+    return this.language
+  }
+
   setLang(lang: string): void {
-    this.updateData({ language: setLanguage(lang) })
+    this.language = setLanguage(lang)
+    localStorage.setItem(this.languageKey, this.language)
+
     location.reload()
   }
 }

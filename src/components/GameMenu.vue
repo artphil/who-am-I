@@ -53,7 +53,7 @@ const closeModal = () => {
         <Help /> <span>{{ t('HELP_TITLE') }}</span>
       </li>
       <li @click="openStats">
-        <Chart /> <span>{{ t('PLAYER_STATS') }}</span>
+        <Chart /> <span>{{ t('STATS') }}</span>
       </li>
       <li @click="openMenuLang">
         <Language /> <span>{{ t('LANGUAGE') }}</span>
