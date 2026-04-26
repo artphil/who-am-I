@@ -73,19 +73,6 @@ const closeModal = () => {
   position: relative;
 }
 
-.menu button {
-  background: var(--color-background-cards);
-  color: var(--color-headding);
-  border: 2px solid var(--color-border);
-  border-radius: var(--border-radius);
-  padding: .5rem;
-}
-
-.menu button:hover {
-  background: var(--color-background-modal);
-  border: 2px solid var(--color-border-hover);
-}
-
 .dropdown {
   position: absolute;
   top: 0;

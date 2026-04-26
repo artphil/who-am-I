@@ -11,6 +11,9 @@ export default {
     es: 'Escribe un nombre.',
     pt: 'Digite um nome.',
   },
+  TRY_AGAIN: { en: 'Try again', es: 'Intentar de nuevo', pt: 'Tentar novamente' },
+  SHARE: { en: 'Share', es: 'Compartir', pt: 'Compartilhar' },
+  COPIED: { en: 'Copied', es: 'Copiado', pt: 'Copiado' },
 
   // Settings
   LANGUAGE: { en: 'Language', es: 'Idioma', pt: 'Idioma' },
@@ -119,6 +122,11 @@ export default {
     en: 'Sorry, this character is not in our list.',
     es: 'Lo sentimos, este personaje no está en nuestra lista.',
     pt: 'Desculpe, este personagem não está na nossa lista.',
+  },
+  SHARE_MESSAGE: {
+    en: 'I scored {0}/{1} on {2}\nPlay it too!!\n{3}',
+    es: 'Hice {0}/{1} en {2}\n¡Juega tú también!\n{3}',
+    pt: 'Fiz {0}/{1} no {2}\nJogue você também!!\n{3}',
   },
   // Not Found
   NOT_FOUND_PAGE: {

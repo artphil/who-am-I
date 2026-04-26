@@ -1,11 +1,18 @@
 <script lang="ts">
+import { t } from '@/utils/translate';
+
 
 export default {
   name: 'FailList',
   props: {
     wrongList: {
-      type: [] as string[],
+      type: Array as () => string[],
       required: true,
+    }
+  },
+  data() {
+    return {
+      t
     }
   }
 }
@@ -15,7 +22,7 @@ export default {
   <div class="fail-list">
     <ul>
       <li v-for="(word, index) in wrongList" :key="index">
-        {{ word }}
+        {{ t(word) }}
       </li>
     </ul>
   </div>

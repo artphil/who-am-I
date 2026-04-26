@@ -104,3 +104,15 @@ h3 {
   font-weight: 400;
   font-style: normal;
 }
+
+button {
+  background: var(--color-background-cards);
+  color: var(--color-headding);
+  border: 2px solid var(--color-border);
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
+}
+button:hover {
+  background: var(--color-background-modal);
+  border: 2px solid var(--color-border-hover);
+}
