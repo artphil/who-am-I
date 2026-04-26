@@ -60,7 +60,7 @@ function initGame() {
     }
 
     picked = character
-  } else if (current.selectedId) {
+  } else if (current.selectedId && (current.dally || !current.finish)) {
     picked = getById(current.selectedId)
   } else {
     picked = getRandom()
