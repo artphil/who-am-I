@@ -120,6 +120,8 @@ export default {
   KINGS: { en: 'Kings', pt: 'Reis', es: 'Reyes' },
   EXILE: { en: 'Exile', pt: 'Exílio', es: 'Exilio' },
   REDEMPTION: { en: 'Redemption', pt: 'Redenção', es: 'Redención' },
+  NT: { en: 'New Testament', es: 'Nuevo Testamento', pt: 'Novo Testamento' },
+  OT: { en: 'Old Testament', es: 'Antiguo Testamento', pt: 'Antigo Testamento' },
 
   // FEATURES
   AMBITION: { en: 'Ambition', es: 'Ambición', pt: 'Ambição' },
