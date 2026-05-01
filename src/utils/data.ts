@@ -26,4 +26,12 @@ function getRandom() {
   return persons[i]
 }
 
-export { persons, existis, getById, getByIndex, getRandom }
+function getDally() {
+  const today = new Date()
+  const start = new Date(2024, 0, 1) // January 1, 2024
+  const diffTime = Math.abs(today.getTime() - start.getTime())
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24))
+  return getByIndex(diffDays)
+}
+
+export { persons, existis, getById, getByIndex, getDally, getRandom }

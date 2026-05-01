@@ -2,7 +2,7 @@
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-import { getById, getRandom, persons } from '../utils/data'
+import { getById, getDally, getRandom, persons } from '../utils/data'
 import { t } from '@/utils/translate'
 import { DEFAULT_UI_DELAY, MAX_WRONG_GUESSES, PERSON_ID, PERSON_NAME } from '@/utils/constants'
 import { playerStorage } from '@/utils/storage'
@@ -63,11 +63,12 @@ function initGame() {
   } else if (current.selectedId && (current.dally || !current.finish)) {
     picked = getById(current.selectedId)
   } else {
-    picked = getRandom()
-    if (picked) {
+    picked = getDally()
+    if (picked && !getById(picked._id)) {
       playerStorage.updateGame({
         ...playerStorage.createGameStatus(),
         selectedId: picked._id,
+        dally: true,
       })
     }
   }
@@ -162,7 +163,7 @@ async function shareGame() {
 
   await navigator.clipboard.writeText(
     t('SHARE_MESSAGE', [
-      (wrongList.value.length+1).toString(),
+      (wrongList.value.length + 1).toString(),
       MAX_WRONG_GUESSES.toString(),
       t('GAME_TITLE'),
       url
