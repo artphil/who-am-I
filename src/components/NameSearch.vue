@@ -80,6 +80,7 @@ export default {
 .name-search {
   position: relative;
   width: 100%;
+  margin: 16px 0;
 }
 
 input {
@@ -104,9 +105,9 @@ input:hover {
   list-style: none;
   margin: 4px 0 0 0;
   padding: 0;
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   border-radius: var(--border-radius);
-  background: var(--color-background-modal);
+  background: var(--color-background-cards);
   color: var(--color-text);
   max-height: 200px;
   overflow-y: auto;
@@ -114,11 +115,13 @@ input:hover {
 }
 
 .dropdown li {
-  padding: 8px;
+  font-size: 18px;
+  padding: 10px;
   cursor: pointer;
 }
 
 .dropdown li:hover {
-  background-color: var(--color-background-cards);
+  background-color: var(--color-background-modal);
+  color: var(--color-heading);
 }
 </style>
