@@ -60,7 +60,7 @@ function initGame() {
     }
 
     picked = character
-  } else if (current.selectedId) {
+  } else if (current.selectedId && (current.dally || !current.finish)) {
     picked = getById(current.selectedId)
   } else {
     picked = getRandom()
@@ -162,7 +162,7 @@ async function shareGame() {
 
   await navigator.clipboard.writeText(
     t('SHARE_MESSAGE', [
-      wrongList.value.length.toString(),
+      (wrongList.value.length+1).toString(),
       MAX_WRONG_GUESSES.toString(),
       t('GAME_TITLE'),
       url
