@@ -31,7 +31,18 @@ export default class SearchIndex {
   includes(query: string) {
     const q = SearchIndex.normalize(query)
 
-    return this.index.filter((item) => item.normalized.includes(q)).map((item) => item.original)
+    return this.index
+      .map((item) => {
+        const pos = item.normalized.indexOf(q)
+
+        return {
+          original: item.original,
+          pos,
+        }
+      })
+      .filter((item) => item.pos !== -1)
+      .sort((a, b) => a.pos - b.pos) // menor índice = mais no início
+      .map((item) => item.original)
   }
 
   fuzzy(query: string, maxDistance = 3) {
@@ -41,11 +52,13 @@ export default class SearchIndex {
       .map((item) => {
         const distance = SearchIndex.levenshtein(q, item.normalized)
 
-        const prefixBonus = item.normalized.startsWith(q) ? -2 : 0
+        const prefixBonus = item.normalized.startsWith(q)
+          ? -2
+          : item.normalized.includes(q)
+            ? -1
+            : 0
 
-        const lengthPenalty = Math.abs(item.normalized.length - q.length)
-
-        const score = distance + prefixBonus + lengthPenalty
+        const score = distance + prefixBonus
 
         return {
           original: item.original,
