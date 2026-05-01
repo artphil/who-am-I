@@ -23,7 +23,7 @@ export default {
   APOLLO: { en: 'Apollo', es: 'Apolo', pt: 'Apolo' },
   AQUILA: { en: 'Aquila', es: 'Aquila', pt: 'Aquila' },
   BALAAM: { en: 'Balaam', es: 'Balaam', pt: 'Balaão' },
-  BARNABAS: { en: 'Barnabas', es: 'Barnabás', pt: 'Barnabás' },
+  BARNABAS: { en: 'Barnabas', es: 'Bernabé', pt: 'Barnabé' },
   BARTHOLOMEW: { en: 'Bartholomew', es: 'Bartolomé', pt: 'Bartolomeu' },
   BATHSHEBA: { en: 'Bathsheba', es: 'Betsabé', pt: 'Bate-Seba' },
   CAIAPHAS: { en: 'Caiaphas', es: 'Caifás', pt: 'Caifás' },
