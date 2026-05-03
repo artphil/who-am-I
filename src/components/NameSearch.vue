@@ -24,7 +24,7 @@ export default {
     }
   },
   methods: {
-    filterNames: debounce(function () {
+    filterNames() {
       const query = this.searchQuery.toLowerCase().trim()
 
       if (!query) {
@@ -35,7 +35,7 @@ export default {
 
       this.filteredNames = this.search.includes(query).slice(0, 20)
       this.openDropdown()
-    }, 100),
+    },
     sendWord() {
       if (this.searchQuery.trim()) {
         this.selectName(this.searchQuery)
