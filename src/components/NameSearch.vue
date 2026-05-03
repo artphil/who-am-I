@@ -24,7 +24,7 @@ export default {
     }
   },
   methods: {
-    filterNames() {
+    filterNames: debounce(function () {
       const query = this.searchQuery.toLowerCase().trim()
 
       if (!query) {
@@ -33,9 +33,9 @@ export default {
         return
       }
 
-      this.filteredNames = this.search.includes(query)
+      this.filteredNames = this.search.includes(query).slice(0, 20)
       this.openDropdown()
-    },
+    }, 100),
     sendWord() {
       if (this.searchQuery.trim()) {
         this.selectName(this.searchQuery)
@@ -50,9 +50,7 @@ export default {
       })
     },
     openDropdown() {
-      if (this.searchQuery) {
         this.showDropdown = true
-      }
     },
     closeDropdown() {
       setTimeout(() => {
@@ -65,14 +63,29 @@ export default {
 
 <template>
   <div class="name-search">
-    <input v-model="searchQuery" type="text" :placeholder="t('INPUT_PLACEHOLDER')" @input="filterNames"
-      @blur="closeDropdown" @focus="openDropdown" ref="searchInput" />
-    <ul v-if="showDropdown && searchQuery" class="dropdown">
-      <li v-if="!filteredNames.length">{{ t('NOT_FOUND') }}</li>
-      <li v-for="name in filteredNames" :key="name" @click="selectName(name)">
-        {{ name }}
-      </li>
-    </ul>
+    <input
+  			v-model="searchQuery"
+  type="text"
+  :placeholder="t('INPUT_PLACEHOLDER')"
+  @input="filterNames"
+  @blur="closeDropdown"
+  @focus="openDropdown"
+  ref="searchInput"
+  autocomplete="new-password"
+/>
+
+<ul v-show="showDropdown && searchQuery" class="dropdown">
+  <li v-if="!filteredNames.length">
+    {{ t('NOT_FOUND') }}
+  </li>
+  <li
+    v-for="name in filteredNames"
+    :key="name"
+    @mousedown.prevent="selectName(name)"
+  >
+    {{ name }}
+  </li>
+</ul>
   </div>
 </template>
 
@@ -111,7 +124,8 @@ input:hover {
   color: var(--color-text);
   max-height: 200px;
   overflow-y: auto;
-  z-index: 10;
+  z-index: 999;
+		webkit-overflow-scrolling: touch;
 }
 
 .dropdown li {
