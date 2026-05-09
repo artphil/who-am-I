@@ -1,33 +1,22 @@
-<script lang="ts">
-import { playerStorage } from '@/utils/storage';
-import GameChart from './GameChart.vue';
-import { t } from '@/utils/translate';
-import GameModal from './GameModal.vue';
+<script setup lang="ts">
+import { ref, computed } from 'vue'
+import { playerStorage } from '@/utils/storage'
+import GameChart from './GameChart.vue'
+import GameModal from './GameModal.vue'
+import { t } from '@/utils/translate'
 
-export default {
+const playerData = ref(playerStorage.getData())
 
-  name: 'GameStats',
-  components: {
-    GameChart,
-    GameModal,
-  },
-  data() {
-    return {
-      chartWidth: 550,
-      chartHeight: 320,
-      hoveredBar: null as null | number,
-      playerData: playerStorage.getData(),
-      t: t
-    }
-  },
-  computed: {
-    winRate() {
-      if (this.playerData.gamesPlayed === 0) return 0;
-      const avg = 100 * this.playerData.gamesWon.reduce((a: number, b: number) => a + b, 0) / this.playerData.gamesPlayed;
-      return Math.round(avg);
-    }
-  },
-}
+const winRate = computed(() => {
+  if (playerData.value.gamesPlayed === 0) return 0
+
+  const totalWins = playerData.value.gamesWon.reduce(
+    (a: number, b: number) => a + b,
+    0
+  )
+
+  return Math.round((100 * totalWins) / playerData.value.gamesPlayed)
+})
 </script>
 
 <template>

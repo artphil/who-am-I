@@ -1,91 +1,75 @@
-<script lang="ts">
-import SearchIndex from '@/utils/search';
-import { t } from '@/utils/translate';
+<script setup lang="ts">
+import { ref, nextTick } from 'vue'
+import SearchIndex from '@/utils/search'
+import { t } from '@/utils/translate'
 
-export default {
-  name: 'NameSearch',
-  props: {
-    nameList: {
-      type: Array as () => string[],
-      required: true
-    },
-    wordHandler: {
-      type: Function as unknown as () => (word: string) => void,
-      required: true
-    }
-  },
-  data() {
-    return {
-      search: new SearchIndex(this.nameList),
-      searchQuery: '',
-      filteredNames: [] as string[],
-      showDropdown: false,
-      t: t,
-    }
-  },
-  methods: {
-    filterNames() {
-      const query = this.searchQuery.toLowerCase().trim()
+const props = defineProps<{
+  nameList: string[]
+  wordHandler: (word: string) => void
+}>()
 
-      if (!query) {
-        this.filteredNames = []
-        this.closeDropdown()
-        return
-      }
+const search = new SearchIndex(props.nameList)
 
-      this.filteredNames = this.search.includes(query).slice(0, 20)
-      this.openDropdown()
-    },
-    sendWord() {
-      if (this.searchQuery.trim()) {
-        this.selectName(this.searchQuery)
-      }
-    },
-    selectName(name: string) {
-      this.searchQuery = ''
-      this.showDropdown = false
-      this.wordHandler(name)
-      this.$nextTick(() => {
-        (this.$refs.searchInput as HTMLInputElement)?.focus()
-      })
-    },
-    openDropdown() {
-        this.showDropdown = true
-    },
-    closeDropdown() {
-      setTimeout(() => {
-        this.showDropdown = false
-      }, 200)
-    }
+const searchQuery = ref('')
+const filteredNames = ref<string[]>([])
+const showDropdown = ref(false)
+
+const searchInput = ref<HTMLInputElement | null>(null)
+
+function filterNames() {
+  const query = searchQuery.value.toLowerCase().trim()
+
+  if (!query) {
+    filteredNames.value = []
+    closeDropdown()
+    return
   }
+
+  filteredNames.value = search.includes(query).slice(0, 20)
+  openDropdown()
+}
+
+function sendWord() {
+  if (filteredNames.value.length) {
+    selectName(filteredNames.value[0] || '')
+  }
+}
+
+function selectName(name: string) {
+  searchQuery.value = ''
+  showDropdown.value = false
+  props.wordHandler(name)
+
+  nextTick(() => {
+    searchInput.value?.focus()
+  })
+}
+
+function openDropdown() {
+  showDropdown.value = true
+}
+
+function closeDropdown() {
+  setTimeout(() => {
+    showDropdown.value = false
+  }, 200)
 }
 </script>
 
 <template>
   <div class="name-search">
-    <input
-  			v-model="searchQuery"
-  type="text"
-  :placeholder="t('INPUT_PLACEHOLDER')"
-  @input="filterNames"
-  @blur="closeDropdown"
-  @focus="openDropdown"
-  ref="searchInput"
-  autocomplete="new-password"
-/>
+    <input v-model="searchQuery" type="text" :placeholder="t('INPUT_PLACEHOLDER')" @input="filterNames"
+      @blur="closeDropdown" @focus="openDropdown" ref="searchInput" autocomplete="new-password"
+      @keypress.enter="sendWord" />
 
-<ul v-show="showDropdown && searchQuery" class="dropdown">
-  <li v-if="!filteredNames.length">
-    {{ t('NOT_FOUND') }}
-  </li>
-  <li
-    v-for="name in filteredNames"
-    :key="name"
-    @mousedown.prevent="selectName(name)"
-  >
-    {{ name }}
-  </li>
-</ul>
+    <ul v-show="showDropdown && searchQuery" class="dropdown">
+      <li v-if="!filteredNames.length">
+        {{ t('NOT_FOUND') }}
+      </li>
+      <li v-for="name in filteredNames" :key="name" @mousedown.prevent="selectName(name)">
+        {{ name }}
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -125,7 +109,7 @@ input:hover {
   max-height: 200px;
   overflow-y: auto;
   z-index: 999;
-		webkit-overflow-scrolling: touch;
+  webkit-overflow-scrolling: touch;
 }
 
 .dropdown li {

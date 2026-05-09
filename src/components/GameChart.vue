@@ -1,33 +1,29 @@
-<script lang="ts">
-import { t } from '@/utils/translate';
+<script setup lang="ts">
+import { computed, ref } from 'vue'
+import { t } from '@/utils/translate'
 
-export default {
-  name: 'GameChart',
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-    collumnData: {
-      type: Array as () => number[],
-      required: true
-    }
-  },
-  data() {
-    const maxValue = Math.max(...this.collumnData);
-    const chartWidth = 550;
-    const colGap = 10;
-    return {
-      chartWidth: chartWidth,
-      chartHeight: 320,
-      collumnWidth: (chartWidth - 100) / this.collumnData.length - colGap,
-      collumnGap: colGap,
-      collumnValues: this.collumnData.map(value => maxValue > 0 ? Math.round((value / maxValue) * 100) : 0),
-      hoveredBar: null as null | number,
-      t: t
-    }
-  },
-}
+const props = defineProps<{
+  title: string
+  collumnData: number[]
+}>()
+
+const chartWidth = 550
+const chartHeight = 320
+const collumnGap = 10
+
+const maxValue = computed(() => Math.max(...props.collumnData))
+
+const collumnWidth = computed(() => {
+  return (chartWidth - 100) / props.collumnData.length - collumnGap
+})
+
+const collumnValues = computed(() => {
+  return props.collumnData.map(value =>
+    maxValue.value > 0 ? Math.round((value / maxValue.value) * 100) : 0
+  )
+})
+
+const hoveredBar = ref<number | null>(null)
 </script>
 
 <template>

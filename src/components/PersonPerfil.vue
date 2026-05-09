@@ -1,60 +1,41 @@
-        <script lang="ts">
-        import { CHARACTER_NAME } from '@/utils/constants';
+<script setup lang="ts">
+import { CHARACTER_NAME } from '@/utils/constants'
+import { t } from '@/utils/translate'
+import type { Character } from '@/utils/data'
 
-        import { t } from '@/utils/translate';
-        import PersonFeatures from './PersonFeatures.vue'
+import PersonFeatures from './PersonFeatures.vue'
 
-        export default {
-          name: 'PersonPerfil',
-          components: {
-            PersonFeatures
-          },
-          props: {
-            correctCharacter: {
-              type: Object,
-              required: true
-            },
-            selectedCharacter: {
-              type: Object,
-              required: true
-            }
-          },
-          methods: {
-            isCorrect(attr: string, value: string) {
-              const correctValue = this.correctCharacter[attr]
-              if (Array.isArray(correctValue)) {
-                return correctValue.includes(value)
-              }
-              return correctValue === value;
-            },
-            getFeatures() {
-              return Object.fromEntries(
-                Object.entries(this.selectedCharacter).filter(([key]) => !key.startsWith('_')))
-            },
-          },
-          data() {
-            return {
-              t,
-              PERSON_NAME: CHARACTER_NAME,
-            }
-          }
-        };
+const props = defineProps<{
+  correctCharacter: Character
+  selectedCharacter: Character
+}>()
+
+const correctFeatures = getFeatures(props.correctCharacter)
+const selectedFeatures = getFeatures(props.selectedCharacter)
+
+function getFeatures(character: Character): Record<string, string[]> {
+  return Object.fromEntries(
+    Object.entries(character).filter(
+      ([key]) => !key.startsWith('_')
+    ).map(([key, value]) => [key, value as string[]])
+  )
+}
 </script>
 
 <template>
   <div class="character-perfil">
     <div class="perfil-header">
-      <h2>{{ t(selectedCharacter[PERSON_NAME]) }}</h2>
+      <h2>{{ t(selectedCharacter[CHARACTER_NAME]) }}</h2>
     </div>
 
     <div class="perfil-content">
-      <div v-if="selectedCharacter.image" class="perfil-image">
-        <img :src="selectedCharacter.image" :alt="selectedCharacter[PERSON_NAME]" />
-      </div>
+      <!-- <div v-if="selectedCharacter.image" class="perfil-image">
+        <img :src="selectedCharacter.image" :alt="selectedCharacter[CHARACTER_NAME]" />
+      </div> -->
 
       <div class="perfil-attributes">
-        <PersonFeatures v-for="(value, key, index) in getFeatures()" :title="key" :features="value"
-          :correctFeatures="correctCharacter[key]" :key="index" />
+        <PersonFeatures v-for="(value, key, index) in selectedFeatures" :title="key" :features="value"
+          :correctFeatures="correctFeatures[key] || []" :key="index" />
       </div>
     </div>
   </div>

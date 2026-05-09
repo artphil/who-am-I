@@ -1,21 +1,7 @@
-<script lang="ts">
-import { t } from '@/utils/translate';
-import PersonFeatures from './PersonFeatures.vue';
-import GameModal from './GameModal.vue';
-
-export default {
-
-  name: 'GameHelp',
-  components: {
-    PersonFeatures,
-    GameModal,
-  },
-  data() {
-    return {
-      t: t
-    }
-  },
-}
+<script setup lang="ts">
+import { t } from '@/utils/translate'
+import PersonFeatures from './PersonFeatures.vue'
+import GameModal from './GameModal.vue'
 </script>
 
 <template>

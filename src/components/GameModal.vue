@@ -1,25 +1,14 @@
-<script lang="ts">
+<script setup lang="ts">
+defineProps<{
+  title: string
+}>()
 
-export default {
+const emit = defineEmits<{
+  (e: 'close'): void
+}>()
 
-  name: 'GameModal',
-  props: {
-    title: {
-      type: String,
-      required: true
-    },
-  },
-  data() {
-    return {
-      chartWidth: 550,
-      chartHeight: 320,
-    }
-  },
-  methods: {
-    closeModal() {
-      this.$emit('close');
-    }
-  }
+function closeModal() {
+  emit('close')
 }
 </script>
 
