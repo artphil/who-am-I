@@ -139,4 +139,9 @@ export default {
     es: 'Volver al inicio',
     pt: 'Voltar para o início',
   },
+  NO_MATCHING_FEATURES: {
+    en: 'No matching features',
+    es: 'No hay características coincidentes',
+    pt: 'Nenhuma característica correspondente',
+  },
 }

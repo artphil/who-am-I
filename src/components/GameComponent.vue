@@ -3,10 +3,10 @@ import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import { getById, getDally, getRandom, characterData } from '@/utils/data'
-import type { CharacterType } from '@/utils/data'
+import type { Character } from '@/utils/data'
 import { t } from '@/utils/translate'
-import { DEFAULT_UI_DELAY, MAX_WRONG_GUESSES, PERSON_ID, PERSON_NAME } from '@/utils/constants'
-import { playerStorage } from '@/utils/storage'
+import { DEFAULT_UI_DELAY, MAX_WRONG_GUESSES, CHARACTER_ID, CHARACTER_NAME } from '@/utils/constants'
+import { playerStorage, type WrongItem } from '@/utils/storage'
 
 import FailList from './FailList.vue'
 import GameStats from './GameStats.vue'
@@ -14,6 +14,7 @@ import NameSearch from './NameSearch.vue'
 import PersonPerfil from './PersonPerfil.vue'
 import Share from '@/assets/icons/ShareIcon.vue'
 import Reload from '@/assets/icons/ReloadIcon.vue'
+import { getIntersection } from '@/utils/game.helper'
 
 const COPIED_LABEL_KEY = 'COPIED'
 const SHARE_LABEL_KEY = 'SHARE'
@@ -29,16 +30,16 @@ function getCharacterId(): string {
 }
 
 // estado reativo
-const correct = ref<CharacterType | null>(null)
+const correct = ref<Character | null>(null)
 const correctName = ref('')
-const wrongList = ref<string[]>([])
-const lastSelected = ref<CharacterType | null>(null)
+const wrongList = ref<WrongItem[]>([])
+const lastSelected = ref<Character | null>(null)
 const isFinished = ref(false)
 const isWin = ref(false)
 const isModalOpen = ref(false)
 const shareLabel = ref(SHARE_LABEL_KEY)
 
-const names = characterData.map(p => t(p[PERSON_NAME]))
+const names = characterData.map(p => t(p[CHARACTER_NAME]))
 const max_tries = MAX_WRONG_GUESSES
 
 // init do jogo
@@ -82,10 +83,10 @@ function initGame() {
     return
   }
 
-  const gameStatus = playerStorage.getGame(picked[PERSON_ID])
+  const gameStatus = playerStorage.getGame(picked[CHARACTER_ID])
 
   correct.value = picked
-  correctName.value = t(picked[PERSON_NAME])
+  correctName.value = t(picked[CHARACTER_NAME])
   wrongList.value = gameStatus.wrongList
   isFinished.value = gameStatus.finish
   isWin.value = gameStatus.win
@@ -93,7 +94,7 @@ function initGame() {
   lastSelected.value = gameStatus.win
     ? picked
     : gameStatus.wrongList.length
-      ? characterData.find(p => p[PERSON_NAME] === gameStatus.wrongList[0])
+      ? characterData.find(c => c[CHARACTER_NAME] === gameStatus.wrongList[0]?.name) || null
       : null
 }
 
@@ -111,17 +112,17 @@ function checkWord(word: string) {
   if (!word.trim()) return
   if (!names.includes(word)) return
 
-  lastSelected.value = characterData.find(p => t(p[PERSON_NAME]) === word) || null
-  const personName = lastSelected.value?.[PERSON_NAME] || ''
+  lastSelected.value = characterData.find(p => t(p[CHARACTER_NAME]) === word) || null
+  const charName = lastSelected.value?.[CHARACTER_NAME] || ''
 
-  if (personName && wrongList.value.includes(personName)) return
+  if (charName && wrongList.value.some(item => item.name === charName)) return
 
   if (word === correctName.value) {
     gameOver()
     return
   }
 
-  wrongList.value.unshift(personName)
+  wrongList.value.unshift({ name: charName, list: lastSelected.value && correct.value ? getIntersection(lastSelected.value || [], correct.value) : [] })
   playerStorage.updateGame({ wrongList: wrongList.value })
 
   if (wrongList.value.length >= max_tries) {
@@ -180,7 +181,7 @@ async function shareGame() {
 }
 
 function randomGame() {
-  const id = getRandom()?.[PERSON_ID]
+  const id = getRandom()?.[CHARACTER_ID]
   router.push('/' + id)
 }
 

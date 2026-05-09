@@ -1,3 +1,10 @@
+/**
+ * Rules for characters in the game.
+ * Each character has a unique ID, a name and a set of features that can be used as clues.
+ * The name key and the id key start with an underscore to avoid conflicts with the features keys.
+ * The features sets keys start without underscore and is an array of strings.
+ */
+
 export default [
   {
     _id: '003fc57b8bf6',

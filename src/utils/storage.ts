@@ -1,19 +1,24 @@
-import { DEFAULT_LANGUAGE, MAX_WRONG_GUESSES } from './constants'
+import { MAX_WRONG_GUESSES } from './constants'
 import { getLanguage, setLanguage } from './translate'
 
-export interface PlayerData {
+export type PlayerData = {
   gamesPlayed: number
   activeSequence: number
   maxSequence: number
   gamesWon: number[]
 }
 
-export interface GameStatus {
+export type WrongItem = {
+  name: string
+  list: string[]
+}
+
+export type GameStatus = {
   dally: boolean
   finish: boolean
   win: boolean
   selectedId: string
-  wrongList: string[]
+  wrongList: WrongItem[]
 }
 
 class PlayerStorage {

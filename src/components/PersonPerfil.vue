@@ -1,5 +1,5 @@
         <script lang="ts">
-        import { PERSON_NAME } from '@/utils/constants';
+        import { CHARACTER_NAME } from '@/utils/constants';
 
         import { t } from '@/utils/translate';
         import PersonFeatures from './PersonFeatures.vue'
@@ -35,7 +35,7 @@
           data() {
             return {
               t,
-              PERSON_NAME,
+              PERSON_NAME: CHARACTER_NAME,
             }
           }
         };
