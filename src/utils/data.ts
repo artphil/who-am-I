@@ -1,10 +1,11 @@
 import characters from '@/theme/characters'
 import { PERSON_ID } from './constants'
 
-const persons = characters
+const characterData = characters
+type CharacterType = (typeof characters)[0]
 
 function getById(id: string) {
-  for (const item of persons) {
+  for (const item of characterData) {
     if (item[PERSON_ID] == id.toLowerCase()) {
       return item
     }
@@ -17,13 +18,13 @@ function existis(id: string) {
 }
 
 function getByIndex(index: number) {
-  const i = index % persons.length
-  return persons[i]
+  const i = index % characterData.length
+  return characterData[i]
 }
 
 function getRandom() {
-  const i = Math.floor(Math.random() * persons.length)
-  return persons[i]
+  const i = Math.floor(Math.random() * characterData.length)
+  return characterData[i]
 }
 
 function getDally() {
@@ -34,4 +35,4 @@ function getDally() {
   return getByIndex(diffDays)
 }
 
-export { persons, existis, getById, getByIndex, getDally, getRandom }
+export { characterData, existis, getById, getByIndex, getDally, getRandom, type CharacterType }

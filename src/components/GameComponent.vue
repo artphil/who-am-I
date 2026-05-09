@@ -2,7 +2,8 @@
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
-import { getById, getDally, getRandom, persons } from '../utils/data'
+import { getById, getDally, getRandom, characterData } from '@/utils/data'
+import type { CharacterType } from '@/utils/data'
 import { t } from '@/utils/translate'
 import { DEFAULT_UI_DELAY, MAX_WRONG_GUESSES, PERSON_ID, PERSON_NAME } from '@/utils/constants'
 import { playerStorage } from '@/utils/storage'
@@ -28,16 +29,16 @@ function getCharacterId(): string {
 }
 
 // estado reativo
-const correct = ref<any>(null)
+const correct = ref<CharacterType | null>(null)
 const correctName = ref('')
 const wrongList = ref<string[]>([])
-const lastSelected = ref<any>(null)
+const lastSelected = ref<CharacterType | null>(null)
 const isFinished = ref(false)
 const isWin = ref(false)
 const isModalOpen = ref(false)
 const shareLabel = ref(SHARE_LABEL_KEY)
 
-const names = persons.map(p => t(p[PERSON_NAME]))
+const names = characterData.map(p => t(p[PERSON_NAME]))
 const max_tries = MAX_WRONG_GUESSES
 
 // init do jogo
@@ -92,7 +93,7 @@ function initGame() {
   lastSelected.value = gameStatus.win
     ? picked
     : gameStatus.wrongList.length
-      ? persons.find(p => p[PERSON_NAME] === gameStatus.wrongList[0])
+      ? characterData.find(p => p[PERSON_NAME] === gameStatus.wrongList[0])
       : null
 }
 
@@ -110,7 +111,7 @@ function checkWord(word: string) {
   if (!word.trim()) return
   if (!names.includes(word)) return
 
-  lastSelected.value = persons.find(p => t(p[PERSON_NAME]) === word) || null
+  lastSelected.value = characterData.find(p => t(p[PERSON_NAME]) === word) || null
   const personName = lastSelected.value?.[PERSON_NAME] || ''
 
   if (personName && wrongList.value.includes(personName)) return
