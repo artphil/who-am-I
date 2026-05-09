@@ -42,7 +42,7 @@
 </script>
 
 <template>
-  <div class="person-perfil">
+  <div class="character-perfil">
     <div class="perfil-header">
       <h2>{{ t(selectedCharacter[PERSON_NAME]) }}</h2>
     </div>
@@ -62,7 +62,7 @@
 
 
 <style scoped>
-.person-perfil {
+.character-perfil {
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
   padding: 20px;
