@@ -204,7 +204,7 @@ function closeModal() {
         <Share /> {{ t(shareLabel) }}
       </button>
     </div>
-    <PersonPerfil v-if="lastSelected" :correctCharacter="correct as any" :selectedCharacter="lastSelected" />
+    <PersonPerfil v-if="correct && lastSelected" :correctCharacter="correct" :selectedCharacter="lastSelected" />
     <FailList v-if="wrongList.length" :wrongList="wrongList" />
   </div>
   <GameStats v-if="isModalOpen" :isOpen="isModalOpen" @close="closeModal" />

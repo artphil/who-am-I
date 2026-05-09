@@ -5,13 +5,10 @@ import type { Character } from '@/utils/data'
 
 import PersonFeatures from './PersonFeatures.vue'
 
-const props = defineProps<{
+defineProps<{
   correctCharacter: Character
   selectedCharacter: Character
 }>()
-
-const correctFeatures = getFeatures(props.correctCharacter)
-const selectedFeatures = getFeatures(props.selectedCharacter)
 
 function getFeatures(character: Character): Record<string, string[]> {
   return Object.fromEntries(
@@ -26,16 +23,14 @@ function getFeatures(character: Character): Record<string, string[]> {
   <div class="character-perfil">
     <div class="perfil-header">
       <h2>{{ t(selectedCharacter[CHARACTER_NAME]) }}</h2>
+      <!-- <div v-if="selectedCharacter.image" class="perfil-image">        <img :src="selectedCharacter.image" :alt="selectedCharacter[CHARACTER_NAME]" />      </div> -->
     </div>
 
     <div class="perfil-content">
-      <!-- <div v-if="selectedCharacter.image" class="perfil-image">
-        <img :src="selectedCharacter.image" :alt="selectedCharacter[CHARACTER_NAME]" />
-      </div> -->
 
       <div class="perfil-attributes">
-        <PersonFeatures v-for="(value, key, index) in selectedFeatures" :title="key" :features="value"
-          :correctFeatures="correctFeatures[key] || []" :key="index" />
+        <PersonFeatures v-for="(value, key, index) in getFeatures(selectedCharacter)" :title="key" :features="value"
+          :correctFeatures="getFeatures(correctCharacter)[key] || []" :key="index" />
       </div>
     </div>
   </div>
