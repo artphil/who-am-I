@@ -69,12 +69,15 @@ function initGame() {
     picked = getById(current.selectedId)
   } else {
     picked = getDally()
-    if (picked && !getById(picked._id)) {
-      playerStorage.updateGame({
-        ...playerStorage.createGameStatus(),
-        selectedId: picked._id,
-        dally: true,
-      })
+    if (picked) {
+      const dallyCurrent = playerStorage.getGame(picked._id)
+      if (!dallyCurrent?.selectedId) {
+        playerStorage.updateGame({
+          ...dallyCurrent,
+          selectedId: picked._id,
+          dally: true,
+        })
+      }
     }
   }
 
