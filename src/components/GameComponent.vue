@@ -14,6 +14,9 @@ import PersonPerfil from './PersonPerfil.vue'
 import Share from '@/assets/icons/ShareIcon.vue'
 import Reload from '@/assets/icons/ReloadIcon.vue'
 
+const COPIED_LABEL_KEY = 'COPIED'
+const SHARE_LABEL_KEY = 'SHARE'
+
 // router
 const route = useRoute()
 const router = useRouter()
@@ -32,7 +35,7 @@ const lastSelected = ref<any>(null)
 const isFinished = ref(false)
 const isWin = ref(false)
 const isModalOpen = ref(false)
-const shareLabel = ref('SHARE')
+const shareLabel = ref(SHARE_LABEL_KEY)
 
 const names = persons.map(p => t(p[PERSON_NAME]))
 const max_tries = MAX_WRONG_GUESSES
@@ -159,7 +162,7 @@ function gameOver() {
 }
 
 async function shareGame() {
-  const url = `${window.location.origin}/${correct.value?.[PERSON_ID]}`
+  const url = `${window.location.origin}/${playerStorage.getGame()?.dally ? '' : getCharacterId()}`
 
   await navigator.clipboard.writeText(
     t('SHARE_MESSAGE', [
@@ -170,8 +173,9 @@ async function shareGame() {
     ])
   )
 
-  shareLabel.value = 'COPIED'
-  setTimeout(() => (shareLabel.value = 'SHARE'), DEFAULT_UI_DELAY)
+  const newLocal = COPIED_LABEL_KEY
+  shareLabel.value = newLocal
+  setTimeout(() => (shareLabel.value = SHARE_LABEL_KEY), DEFAULT_UI_DELAY)
 }
 
 function randomGame() {
