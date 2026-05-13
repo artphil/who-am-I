@@ -152,6 +152,7 @@ export default {
   MANIPULATION: { en: 'Manipulation', es: 'Manipulación', pt: 'Manipulação' },
   MIRACLES: { en: 'Miracles', es: 'Milagros', pt: 'Milagres' },
   OBEDIENCE: { en: 'Obedience', es: 'Obediencia', pt: 'Obediência' },
+  OBEDIENCE_GOD: { en: 'Obedience to God', es: 'Obediencia a Dios', pt: 'Obediência a Deus' },
   PERSECUTION: { en: 'Persecution', es: 'Persecución', pt: 'Perseguição' },
   PERSEVERANCE: { en: 'Perseverance', es: 'Perseverancia', pt: 'Perseverança' },
   PRIEST: { en: 'Priest', es: 'Sacerdote', pt: 'Sacerdote' },
