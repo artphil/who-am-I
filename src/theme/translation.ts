@@ -46,7 +46,11 @@ export default {
   ISAAC: { en: 'Isaac', es: 'Isaac', pt: 'Isaque' },
   ISAIAH: { en: 'Isaiah', es: 'Isaías', pt: 'Isaías' },
   JACOB: { en: 'Jacob', es: 'Jacob', pt: 'Jacó' },
-  JAMES: { en: 'James', es: 'Santiago', pt: 'Tiago' },
+  JAMES_JOSEPH: {
+    en: "James (Jesus's brother)",
+    es: 'Tiago (hermano de Jesús)',
+    pt: 'Tiago (irmão de Jesus)',
+  },
   JEREMIAH: { en: 'Jeremiah', es: 'Jeremías', pt: 'Jeremias' },
   JEROBOAM: { en: 'Jeroam', es: 'Jeroboam', pt: 'Jeroboão' },
   JESUS: { en: 'Jesus', es: 'Jesús', pt: 'Jesus' },
@@ -132,6 +136,7 @@ export default {
   BETRAYER: { en: 'Betrayer', es: 'Traidor', pt: 'Traidor' },
   COMMITMENT: { en: 'Commitment', es: 'Compromiso', pt: 'Compromisso' },
   COMPASSION: { en: 'Compassion', es: 'Compasión', pt: 'Compaixão' },
+  COMMONER: { en: 'Commoner', es: 'Persona común', pt: 'Pessoa comum' },
   COURAGE: { en: 'Courage', es: 'Valentía', pt: 'Coragem' },
   DECISION: { en: 'Decision', es: 'Decisión', pt: 'Decisão' },
   DISCIPLE: { en: 'Disciple', es: 'Discípulo', pt: 'Discípulo' },
@@ -161,6 +166,7 @@ export default {
   REBELLION: { en: 'Rebellion', es: 'Rebelión', pt: 'Rebelião' },
   REPENTANCE: { en: 'Repentance', es: 'Arrepentimiento', pt: 'Arrependimento' },
   SACRIFICE: { en: 'Sacrifice', es: 'Sacrificio', pt: 'Sacrifício' },
+  SEDUCTION: { en: 'Seduction', es: 'Seducción', pt: 'Sedução' },
   VISIONS: { en: 'Visions', es: 'Visiones', pt: 'Visões' },
   WISDOM: { en: 'Wisdom', es: 'Sabiduría', pt: 'Sabedoria' },
 }
