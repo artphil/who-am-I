@@ -6,6 +6,7 @@ export type PlayerData = {
   activeSequence: number
   maxSequence: number
   gamesWon: number[]
+  lastDate: string | undefined
 }
 
 export type WrongItem = {
@@ -50,7 +51,14 @@ class PlayerStorage {
   private loadData(): PlayerData {
     const stored = localStorage.getItem(this.storageKey)
     if (stored) {
-      return JSON.parse(stored)
+      const data = JSON.parse(stored)
+      const today = new Date().toISOString().split('T')[0]
+      if (data.lastDate !== today) {
+        this.updateGame({ dally: false })
+        localStorage.removeItem(this.dallyKey)
+        data.lastDate = today
+      }
+      return data
     }
     this.isNew = true
     const defaultData = this.createDefaultPlayerData()
@@ -65,6 +73,7 @@ class PlayerStorage {
       activeSequence: 0,
       maxSequence: 0,
       gamesWon: new Array(MAX_WRONG_GUESSES).fill(0),
+      lastDate: new Date().toISOString().split('T')[0],
     }
   }
 
