@@ -7,14 +7,14 @@ import type { Character } from '@/utils/data'
 import { t } from '@/utils/translate'
 import { DEFAULT_UI_DELAY, MAX_WRONG_GUESSES, CHARACTER_ID, CHARACTER_NAME } from '@/utils/constants'
 import { playerStorage, type WrongItem } from '@/utils/storage'
+import { getIntersection } from '@/utils/game.helper'
 
 import FailList from './FailList.vue'
 import GameStats from './GameStats.vue'
 import NameSearch from './NameSearch.vue'
-import PersonPerfil from './PersonPerfil.vue'
+import CharacterPerfil from './CharacterPerfil.vue'
 import Share from '@/assets/icons/ShareIcon.vue'
 import Reload from '@/assets/icons/ReloadIcon.vue'
-import { getIntersection } from '@/utils/game.helper'
 
 const COPIED_LABEL_KEY = 'COPIED'
 const SHARE_LABEL_KEY = 'SHARE'
@@ -207,7 +207,7 @@ function closeModal() {
         <Share /> {{ t(shareLabel) }}
       </button>
     </div>
-    <PersonPerfil v-if="correct && lastSelected" :correctCharacter="correct" :selectedCharacter="lastSelected" />
+    <CharacterPerfil v-if="correct && lastSelected" :correctCharacter="correct" :selectedCharacter="lastSelected" />
     <FailList v-if="wrongList.length" :wrongList="wrongList" />
   </div>
   <GameStats v-if="isModalOpen" :isOpen="isModalOpen" @close="closeModal" />

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { t } from '@/utils/translate'
-import PersonFeatures from './PersonFeatures.vue'
+import PersonFeatures from './CharacterFeatures.vue'
 import GameModal from './GameModal.vue'
 </script>
 

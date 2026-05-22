@@ -3,7 +3,7 @@ import { CHARACTER_NAME } from '@/utils/constants'
 import { t } from '@/utils/translate'
 import type { Character } from '@/utils/data'
 
-import PersonFeatures from './PersonFeatures.vue'
+import CharacterFeatures from './CharacterFeatures.vue'
 
 defineProps<{
   correctCharacter: Character
@@ -29,7 +29,7 @@ function getFeatures(character: Character): Record<string, string[]> {
     <div class="perfil-content">
 
       <div class="perfil-attributes">
-        <PersonFeatures v-for="(value, key, index) in getFeatures(selectedCharacter)" :title="key" :features="value"
+        <CharacterFeatures v-for="(value, key, index) in getFeatures(selectedCharacter)" :title="key" :features="value"
           :correctFeatures="getFeatures(correctCharacter)[key] || []" :key="index" />
       </div>
     </div>
