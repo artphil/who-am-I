@@ -39,10 +39,6 @@ function selectName(name: string) {
   searchQuery.value = ''
   showDropdown.value = false
   props.wordHandler(name)
-
-  nextTick(() => {
-    searchInput.value?.focus()
-  })
 }
 
 function openDropdown() {
