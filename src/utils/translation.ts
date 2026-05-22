@@ -6,6 +6,11 @@ export default {
     es: 'Adivina el personaje basado en sus características.',
     pt: 'Adivinhe o personagem com base em suas características.',
   },
+  UNKNOWN_DESCRIPTION: {
+    en: 'Guess who I am based on my traits.',
+    es: 'Adivina quién soy basado en mis características.',
+    pt: 'Adivinhe quem eu sou com base em minhas características.',
+  },
   INPUT_PLACEHOLDER: {
     en: 'Type a name.',
     es: 'Escribe un nombre.',
@@ -103,6 +108,16 @@ export default {
   },
 
   // Game Messages
+  CHARACTER_CORRECT: {
+    en: 'You got it right!',
+    es: '¡Acertaste!',
+    pt: 'Você acertou!',
+  },
+  CHARACTER_WRONG: {
+    en: 'That’s not it!',
+    es: '¡No es correcto!',
+    pt: 'Você errou!',
+  },
   GAME_OVER_SUCCESS: {
     en: 'Congratulations! You guessed correctly!',
     es: '¡Felicidades! ¡Adivinaste correctamente!',

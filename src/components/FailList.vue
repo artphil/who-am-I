@@ -15,7 +15,7 @@ defineProps<{
       <li v-for="(char, index) in wrongList" :key="index">
         <h3>{{ t(char.name) }}</h3>
         <div>
-          <FeatureTag v-for="(feature, idx) in char.list" :key="idx" :text="feature" :isCorrect="true" />
+          <FeatureTag v-for="(feature, idx) in char.list" :key="idx" :text="feature" :isCorrect="false" />
           <FeatureTag v-if="!char.list.length" :text="'NO_MATCHING_FEATURES'" :isCorrect="false" />
         </div>
       </li>

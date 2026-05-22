@@ -46,6 +46,7 @@ const isCorrect = (value: string) => {
   display: flex;
   padding: 8px;
   padding-top: 16px;
+  min-height: 3.5rem;
   border-radius: var(--border-radius);
   border: 1px solid var(--color-divider);
   flex-wrap: wrap;

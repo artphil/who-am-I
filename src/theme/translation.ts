@@ -146,6 +146,7 @@ export default {
   FOOLISHNESS: { en: 'Foolishness', es: 'Insensatez', pt: 'Insensatez' },
   FORGIVENESS: { en: 'Forgiveness', es: 'Perdón', pt: 'Perdão' },
   GENEROSITY: { en: 'Generosity', es: 'Generosidad', pt: 'Generosidade' },
+  GOVERNMENT: { en: 'Government', es: 'Gobierno', pt: 'Governo' },
   HOLINESS: { en: 'Holiness', es: 'Santidad', pt: 'Santidade' },
   HONESTY: { en: 'Honesty', es: 'Honestidad', pt: 'Honestidade' },
   HONOR: { en: 'Honor', es: 'Honor', pt: 'Honra' },

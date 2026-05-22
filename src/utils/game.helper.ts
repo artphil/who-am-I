@@ -15,3 +15,20 @@ export function getIntersection(source: Character, target: Character): string[] 
     })
   return intersection
 }
+
+export function getDifference(source: Character, target: Character): string[] {
+  const difference: string[] = []
+  Object.keys(source)
+    .filter((key) => !key.startsWith('_'))
+    .forEach((key) => {
+      const sourceValue = source[key as keyof Character] as string[]
+      const targetValue = target[key as keyof Character] as string[]
+      const intersection: string[] = []
+      sourceValue.forEach((element) => {
+        if (!targetValue.includes(element)) {
+          difference.push(element)
+        }
+      })
+    })
+  return difference
+}

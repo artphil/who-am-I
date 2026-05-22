@@ -7,7 +7,7 @@ import type { Character } from '@/utils/data'
 import { t } from '@/utils/translate'
 import { DEFAULT_UI_DELAY, MAX_WRONG_GUESSES, CHARACTER_ID, CHARACTER_NAME } from '@/utils/constants'
 import { playerStorage, type WrongItem } from '@/utils/storage'
-import { getIntersection } from '@/utils/game.helper'
+import { getIntersection, getDifference } from '@/utils/game.helper'
 
 import FailList from './FailList.vue'
 import GameStats from './GameStats.vue'
@@ -15,6 +15,7 @@ import NameSearch from './NameSearch.vue'
 import CharacterPerfil from './CharacterPerfil.vue'
 import Share from '@/assets/icons/ShareIcon.vue'
 import Reload from '@/assets/icons/ReloadIcon.vue'
+import CharacterModal from './CharacterModal.vue'
 
 const COPIED_LABEL_KEY = 'COPIED'
 const SHARE_LABEL_KEY = 'SHARE'
@@ -34,13 +35,20 @@ const correct = ref<Character | null>(null)
 const correctName = ref('')
 const wrongList = ref<WrongItem[]>([])
 const lastSelected = ref<Character | null>(null)
+const unknown = ref<Character | null>(null)
 const isFinished = ref(false)
 const isWin = ref(false)
 const isModalOpen = ref(false)
+const isCharacterOpen = ref(false)
 const shareLabel = ref(SHARE_LABEL_KEY)
+const correctFeatures = ref<string[]>([])
 
 const names = characterData.map(p => t(p[CHARACTER_NAME]))
 const max_tries = MAX_WRONG_GUESSES
+
+
+// executar inicialização
+initGame()
 
 // init do jogo
 function initGame() {
@@ -89,6 +97,8 @@ function initGame() {
   const gameStatus = playerStorage.getGame(picked[CHARACTER_ID])
 
   correct.value = picked
+  correctFeatures.value = gameStatus.correctFeatures || []
+  unknown.value = getUnknown(picked, correctFeatures.value, gameStatus.finish)
   correctName.value = t(picked[CHARACTER_NAME])
   wrongList.value = gameStatus.wrongList
   isFinished.value = gameStatus.finish
@@ -101,8 +111,30 @@ function initGame() {
       : null
 }
 
-// executar inicialização
-initGame()
+function getUnknown(correct: Character, correctFeatures: string[], finished: boolean): Character {
+  if (finished) {
+    return correct
+  }
+  return Object.keys(correct).map(key => {
+    if (key === CHARACTER_NAME) {
+      return [key, 'UNKNOWN']
+    }
+    else if (key.startsWith('_')) {
+      return [key, correct[key as keyof Character]]
+    } else {
+      const features = [] as string[]
+      const value = correct[key as keyof Character]
+      if (Array.isArray(value)) {
+        value.forEach(feature => {
+          if (correctFeatures.includes(feature)) {
+            features.push(feature)
+          }
+        })
+      }
+      return [key, features]
+    }
+  }).reduce((acc, [key, value]) => ({ ...acc, [key as string]: value }), {}) as Character
+}
 
 // reagir a mudança de rota
 watch(() => route.params.id, () => {
@@ -120,13 +152,23 @@ function checkWord(word: string) {
 
   if (charName && wrongList.value.some(item => item.name === charName)) return
 
+  isCharacterOpen.value = true
+
   if (word === correctName.value) {
     gameOver()
     return
   }
 
-  wrongList.value.unshift({ name: charName, list: lastSelected.value && correct.value ? getIntersection(lastSelected.value || [], correct.value) : [] })
-  playerStorage.updateGame({ wrongList: wrongList.value })
+  getIntersection(lastSelected.value as Character, correct.value as Character).forEach(feature => {
+    if (!correctFeatures.value.includes(feature)) {
+      correctFeatures.value.push(feature)
+    }
+  })
+
+  unknown.value = getUnknown(correct.value as Character, correctFeatures.value, isFinished.value)
+
+  wrongList.value.unshift({ name: charName, list: lastSelected.value && correct.value ? getDifference(lastSelected.value, correct.value) : [] })
+  playerStorage.updateGame({ wrongList: wrongList.value, correctFeatures: correctFeatures.value })
 
   if (wrongList.value.length >= max_tries) {
     gameOver()
@@ -140,6 +182,7 @@ function gameOver() {
 
   isFinished.value = true
   isWin.value = wrongList.value.length < max_tries
+  unknown.value = getUnknown(correct.value as Character, correctFeatures.value, isFinished.value)
 
   playerStorage.updateGame({
     finish: isFinished.value,
@@ -168,10 +211,10 @@ function gameOver() {
 
 async function shareGame() {
   const url = `${window.location.origin}/${playerStorage.getGame()?.dally ? '' : getCharacterId()}`
-
+  const guesses = wrongList.value.length
   await navigator.clipboard.writeText(
     t('SHARE_MESSAGE', [
-      (wrongList.value.length + 1).toString(),
+      (guesses < MAX_WRONG_GUESSES ? guesses + 1 : "X").toString(),
       MAX_WRONG_GUESSES.toString(),
       t('GAME_TITLE'),
       url
@@ -188,9 +231,6 @@ function randomGame() {
   router.push('/' + id)
 }
 
-function closeModal() {
-  isModalOpen.value = false
-}
 </script>
 
 <template>
@@ -207,10 +247,12 @@ function closeModal() {
         <Share /> {{ t(shareLabel) }}
       </button>
     </div>
-    <CharacterPerfil v-if="correct && lastSelected" :correctCharacter="correct" :selectedCharacter="lastSelected" />
+    <CharacterPerfil v-if="correct && unknown" :correctCharacter="correct" :selectedCharacter="unknown" />
     <FailList v-if="wrongList.length" :wrongList="wrongList" />
   </div>
-  <GameStats v-if="isModalOpen" :isOpen="isModalOpen" @close="closeModal" />
+  <GameStats v-if="isModalOpen" :isOpen="isModalOpen" @close="isModalOpen = false" />
+  <CharacterModal v-if="isCharacterOpen && correct && lastSelected" :correct="correct" :lastSelected="lastSelected"
+    @close="isCharacterOpen = false" />
 </template>
 
 <style scoped>

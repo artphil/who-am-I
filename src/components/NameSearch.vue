@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, nextTick } from 'vue'
+import { ref } from 'vue'
 import SearchIndex from '@/utils/search'
 import { t } from '@/utils/translate'
 

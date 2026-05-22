@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   title: string
+  color?: string
 }>()
 
 const emit = defineEmits<{
@@ -15,7 +16,7 @@ function closeModal() {
 <template>
   <div class="modal-overlay" @click="closeModal">
     <div class="modal-content" @click.stop>
-      <div class="modal-header">
+      <div class="modal-header" :class="color === 'correct' ? 'correct' : color === 'wrong' ? 'wrong' : ''">
         <h2>{{ title }}</h2>
         <button class="close-btn" @click="closeModal">&times;</button>
       </div>
@@ -69,5 +70,13 @@ function closeModal() {
 
 .modal-body {
   padding: 20px;
+}
+
+.correct {
+  background-color: var(--color-correct);
+}
+
+.wrong {
+  background-color: var(--color-wrong);
 }
 </style>

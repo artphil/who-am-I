@@ -20,6 +20,7 @@ export type GameStatus = {
   win: boolean
   selectedId: string
   wrongList: WrongItem[]
+  correctFeatures: string[]
 }
 
 class PlayerStorage {
@@ -139,7 +140,14 @@ class PlayerStorage {
   }
 
   createGameStatus(): GameStatus {
-    return { dally: false, selectedId: '', wrongList: [], finish: false, win: false }
+    return {
+      dally: false,
+      selectedId: '',
+      wrongList: [],
+      finish: false,
+      win: false,
+      correctFeatures: [],
+    }
   }
 }
 
