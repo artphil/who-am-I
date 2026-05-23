@@ -7,9 +7,6 @@ on:
 permissions:
   contents: write
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -24,17 +21,10 @@ jobs:
           node-version: 22
 
       - name: Instalar dependências
-        run: npm install
+        run: npm ci
 
       - name: Build do projeto
-        run: |
-          rm -rf dist
-          npm run build
-        env:
-          VITE_BASE_URL: /who-am-I/
-
-      - name: Debug base
-        run: echo $VITE_BASE_URL
+        run: npm run build
         env:
           VITE_BASE_URL: /who-am-I/
 
@@ -44,7 +34,3 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           force_orphan: true
-          enable_jekyll: false
-
-      - name: Debug dist
-        run: cat dist/index.html
