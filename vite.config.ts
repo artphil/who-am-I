@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd())
 
   return {
-    base: env.VITE_BASE_URL || '/',
+    base: process.env.VITE_BASE_URL || env.VITE_BASE_URL || '/',
     plugins: [vue(), vueJsx(), vueDevTools()],
     resolve: {
       alias: {
