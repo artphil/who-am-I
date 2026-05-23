@@ -28,6 +28,8 @@ jobs:
 
       - name: Build do projeto
         run: npm run build
+        env:
+          VITE_BASE_URL: /who-am-I/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
