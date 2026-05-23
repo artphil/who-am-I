@@ -33,8 +33,16 @@ jobs:
         env:
           VITE_BASE_URL: /who-am-I/
 
+      - name: Debug base
+        run: echo $VITE_BASE_URL
+        env:
+          VITE_BASE_URL: /who-am-I/
+
       - name: Deploy gh-pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+
+      - name: Debug dist
+        run: cat dist/index.html
