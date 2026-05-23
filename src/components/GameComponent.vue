@@ -210,14 +210,19 @@ function gameOver() {
 }
 
 async function shareGame() {
-  const url = `${window.location.origin}/${playerStorage.getGame()?.dally ? '' : getCharacterId()}`
+  // TODO: Remover comentário após transição
+  // Durante a transição para nova url, será compartilhada apenas a nova url.
+  // const baseUrl = window.location.origin
+  // const url = `${baseUrl}/${playerStorage.getGame()?.dally ? '' : getCharacterId()}`
+
+  const baseUrl = 'https://artphil.github.io/who-am-I/'
   const guesses = wrongList.value.length
   await navigator.clipboard.writeText(
     t('SHARE_MESSAGE', [
-      (guesses < MAX_WRONG_GUESSES ? guesses + 1 : "X").toString(),
-      MAX_WRONG_GUESSES.toString(),
       t('GAME_TITLE'),
-      url
+      (playerStorage.getGame()?.win ? guesses + 1 : "X").toString(),
+      MAX_WRONG_GUESSES.toString(),
+      baseUrl // url
     ])
   )
 

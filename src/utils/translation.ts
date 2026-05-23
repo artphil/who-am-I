@@ -139,9 +139,9 @@ export default {
     pt: 'Desculpe, este personagem não está na nossa lista.',
   },
   SHARE_MESSAGE: {
-    en: 'I scored {0}/{1} on {2}\nPlay it too!!\n{3}',
-    es: 'Hice {0}/{1} en {2}\n¡Juega tú también!\n{3}',
-    pt: 'Fiz {0}/{1} no {2}\nJogue você também!!\n{3}',
+    en: "🔍**{0}**🔎\nI made {1}/{2} in today's game.\nPlay too!!\n{3}",
+    es: '🔍**{0}**🔎\nHice {1}/{2} en el juego de hoy.\n¡Juega tú también!!\n{3}',
+    pt: '🔍**{0}**🔎\nEu fiz {1}/{2} no jogo de hoje.\nJogue você também!!\n{3}',
   },
   // Not Found
   NOT_FOUND_PAGE: {
