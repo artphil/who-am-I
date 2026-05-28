@@ -44,7 +44,6 @@ const shareLabel = ref(SHARE_LABEL_KEY)
 const correctFeatures = ref<string[]>([])
 
 const names = characterData.map(p => t(p[CHARACTER_NAME]))
-const max_tries = MAX_WRONG_GUESSES
 
 
 // executar inicialização
@@ -54,6 +53,8 @@ initGame()
 function initGame() {
   const id = getCharacterId()
   const current = playerStorage.getGame()
+  const isUnfinished = current.finish === false
+  const isDally = current.dally === true
 
   let picked = null
 
@@ -73,13 +74,14 @@ function initGame() {
     }
 
     picked = character
-  } else if (current.selectedId && (current.dally || !current.finish)) {
+
+  } else if (current.selectedId && (isDally || isUnfinished)) {
     picked = getById(current.selectedId)
   } else {
     picked = getDally()
     if (picked) {
       const dallyCurrent = playerStorage.getGame(picked._id)
-      if (!dallyCurrent?.selectedId) {
+      if (!dallyCurrent.selectedId) {
         playerStorage.updateGame({
           ...dallyCurrent,
           selectedId: picked._id,
@@ -170,7 +172,7 @@ function checkWord(word: string) {
   wrongList.value.unshift({ name: charName, list: lastSelected.value && correct.value ? getDifference(lastSelected.value, correct.value) : [] })
   playerStorage.updateGame({ wrongList: wrongList.value, correctFeatures: correctFeatures.value })
 
-  if (wrongList.value.length >= max_tries) {
+  if (wrongList.value.length >= MAX_WRONG_GUESSES) {
     gameOver()
   }
 }
@@ -181,7 +183,7 @@ function gameOver() {
   }, DEFAULT_UI_DELAY)
 
   isFinished.value = true
-  isWin.value = wrongList.value.length < max_tries
+  isWin.value = wrongList.value.length < MAX_WRONG_GUESSES
   unknown.value = getUnknown(correct.value as Character, correctFeatures.value, isFinished.value)
 
   playerStorage.updateGame({
@@ -242,7 +244,7 @@ function randomGame() {
   <div class="game-component">
     <h3 v-if="isFinished && isWin">{{ t('GAME_OVER_SUCCESS') }}</h3>
     <h3 v-else-if="isFinished && !isWin">{{ t('GAME_OVER_FAILURE') }} <strong>{{ correctName }}</strong></h3>
-    <span v-else>{{ t('TRIES_LEFT') }}: {{ max_tries - wrongList.length }} / {{ max_tries }}</span>
+    <span v-else>{{ t('TRIES_LEFT') }}: {{ MAX_WRONG_GUESSES - wrongList.length }} / {{ MAX_WRONG_GUESSES }}</span>
     <NameSearch v-if="!isFinished" :nameList="names" :wordHandler="checkWord" />
     <div v-else class="button-group">
       <button @click="randomGame">
