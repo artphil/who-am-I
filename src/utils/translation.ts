@@ -114,9 +114,9 @@ export default {
     pt: 'Você acertou!',
   },
   CHARACTER_WRONG: {
-    en: 'That’s not it!',
-    es: '¡No es correcto!',
-    pt: 'Você errou!',
+    en: 'Not quite! Try again.',
+    es: '¡No es ese! Inténtalo de nuevo.',
+    pt: 'Não é esse! Tente de novo.',
   },
   GAME_OVER_SUCCESS: {
     en: 'Congratulations! You guessed correctly!',

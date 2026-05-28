@@ -38,6 +38,7 @@ function sendWord() {
 function selectName(name: string) {
   searchQuery.value = ''
   showDropdown.value = false
+  searchInput.value?.blur()
   props.wordHandler(name)
 }
 
