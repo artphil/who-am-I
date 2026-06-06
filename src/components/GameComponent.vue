@@ -38,6 +38,7 @@ const lastSelected = ref<Character | null>(null)
 const unknown = ref<Character | null>(null)
 const isFinished = ref(false)
 const isWin = ref(false)
+const isDally = ref(false)
 const isModalOpen = ref(false)
 const isCharacterOpen = ref(false)
 const shareLabel = ref(SHARE_LABEL_KEY)
@@ -53,8 +54,8 @@ initGame()
 function initGame() {
   const id = getCharacterId()
   const current = playerStorage.getGame()
-  const isfinished = current.finish === true
-  const isDally = current.dally === true
+  const isCurrentFinished = current.finish === true
+  const isCurrentDally = current.dally === true
 
   let picked = null
 
@@ -75,7 +76,7 @@ function initGame() {
 
     picked = character
 
-  } else if (current.selectedId && (!isfinished || isDally)) {
+  } else if (current.selectedId && (!isCurrentFinished || isCurrentDally)) {
     picked = getById(current.selectedId)
   } else {
     picked = getDally()
@@ -105,6 +106,7 @@ function initGame() {
   wrongList.value = gameStatus.wrongList
   isFinished.value = gameStatus.finish
   isWin.value = gameStatus.win
+  isDally.value = gameStatus.dally
 
   lastSelected.value = gameStatus.win
     ? picked
@@ -233,9 +235,17 @@ async function shareGame() {
   setTimeout(() => (shareLabel.value = SHARE_LABEL_KEY), DEFAULT_UI_DELAY)
 }
 
-function randomGame() {
-  const id = getRandom()?.[CHARACTER_ID]
-  router.push('/' + id)
+function newGame() {
+  console.log('isDally', isDally.value);
+
+  if (isDally.value) {
+
+    const id = getRandom()?.[CHARACTER_ID]
+    console.log('id', id);
+    router.push('/' + id)
+    return
+  }
+  router.push('/')
 }
 
 </script>
@@ -247,8 +257,8 @@ function randomGame() {
     <span v-else>{{ t('TRIES_LEFT') }}: {{ MAX_WRONG_GUESSES - wrongList.length }} / {{ MAX_WRONG_GUESSES }}</span>
     <NameSearch v-if="!isFinished" :nameList="names" :wordHandler="checkWord" />
     <div v-else class="button-group">
-      <button @click="randomGame">
-        <Reload /> {{ t('TRY_AGAIN') }}
+      <button @click="newGame">
+        <Reload /> {{ isDally ? t('TRY_AGAIN') : t('GO_DALLY') }}
       </button>
       <button @click="shareGame">
         <Share /> {{ t(shareLabel) }}

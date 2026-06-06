@@ -16,7 +16,8 @@ export default {
     es: 'Escribe un nombre.',
     pt: 'Digite um nome.',
   },
-  TRY_AGAIN: { en: 'Try again', es: 'Intentar de nuevo', pt: 'Tentar novamente' },
+  TRY_AGAIN: { en: 'New Game', es: 'Nuevo Juego', pt: 'Novo Jogo' },
+  GO_DALLY: { en: 'Daily game', es: 'Juego del día', pt: 'Jogo do dia.' },
   SHARE: { en: 'Share', es: 'Compartir', pt: 'Compartilhar' },
   COPIED: { en: 'Copied', es: 'Copiado', pt: 'Copiado' },
 
