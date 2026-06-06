@@ -6,7 +6,7 @@ export type PlayerData = {
   activeSequence: number
   maxSequence: number
   gamesWon: number[]
-  lastDate: string | undefined
+  lastDate: string
 }
 
 export type WrongItem = {
@@ -51,20 +51,32 @@ class PlayerStorage {
 
   private loadData(): PlayerData {
     const stored = localStorage.getItem(this.storageKey)
+    const today = this.getToday()
     if (stored) {
       const data = JSON.parse(stored)
-      const today = new Date().toISOString().split('T')[0]
       if (data.lastDate !== today) {
-        this.updateGame({ dally: false })
-        localStorage.removeItem(this.dallyKey)
-        data.lastDate = today
+        this.clearDallyGame()
       }
       return data
     }
+
     this.isNew = true
     const defaultData = this.createDefaultPlayerData()
     localStorage.setItem(this.storageKey, JSON.stringify(defaultData))
     return defaultData
+  }
+
+  private getToday(): string {
+    return new Date().toISOString().split('T')[0] || ''
+  }
+
+  private clearDallyGame(): void {
+    const stored = localStorage.getItem(this.currentKey)
+    if (stored) {
+      const current = JSON.parse(stored)
+      localStorage.setItem(this.currentKey, JSON.stringify({ ...current, dally: false }))
+    }
+    localStorage.removeItem(this.dallyKey)
   }
 
   private createDefaultPlayerData(): PlayerData {
@@ -74,12 +86,22 @@ class PlayerStorage {
       activeSequence: 0,
       maxSequence: 0,
       gamesWon: new Array(MAX_WRONG_GUESSES).fill(0),
-      lastDate: new Date().toISOString().split('T')[0],
+      lastDate: this.getToday(),
     }
   }
 
   private saveData(): void {
     localStorage.setItem(this.storageKey, JSON.stringify(this.data))
+  }
+
+  private updateLastDate(): void {
+    if (!this.data) return
+
+    const today = this.getToday()
+    if (this.data.lastDate !== today) {
+      this.data.lastDate = today
+      this.saveData()
+    }
   }
 
   getData(): PlayerData {
@@ -116,6 +138,7 @@ class PlayerStorage {
   }
 
   saveGame() {
+    this.updateLastDate()
     localStorage.setItem(this.currentKey, JSON.stringify(this.current))
     if (this.current?.dally) {
       this.dally = this.current

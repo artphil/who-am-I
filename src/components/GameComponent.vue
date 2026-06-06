@@ -53,7 +53,7 @@ initGame()
 function initGame() {
   const id = getCharacterId()
   const current = playerStorage.getGame()
-  const isUnfinished = current.finish === false
+  const isfinished = current.finish === true
   const isDally = current.dally === true
 
   let picked = null
@@ -75,7 +75,7 @@ function initGame() {
 
     picked = character
 
-  } else if (current.selectedId && (isDally || isUnfinished)) {
+  } else if (current.selectedId && (!isfinished || isDally)) {
     picked = getById(current.selectedId)
   } else {
     picked = getDally()
