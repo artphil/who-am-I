@@ -236,12 +236,8 @@ async function shareGame() {
 }
 
 function newGame() {
-  console.log('isDally', isDally.value);
-
   if (isDally.value) {
-
     const id = getRandom()?.[CHARACTER_ID]
-    console.log('id', id);
     router.push('/' + id)
     return
   }
