@@ -9,7 +9,7 @@ export default {
   GENDER: { en: 'Gender', es: 'Género', pt: 'Gênero' },
   FEATURE: { en: 'Feature', es: 'Característica', pt: 'Características' },
   FEATURES: { en: 'Features', es: 'Características', pt: 'Característica' },
-  AGE: { en: 'Age', es: 'Edad', pt: 'Era' },
+  PERIOD: { en: 'Period', es: 'Período', pt: 'Período' },
 
   // PERSONAGENS
   AARON: { en: 'Aaron', es: 'Aarón', pt: 'Arão' },
@@ -117,13 +117,14 @@ export default {
   MALE: { en: 'Male', es: 'Masculino', pt: 'Masculino' },
   UNKNOWN: { en: 'Unknown', es: 'Desconocido', pt: 'Desconhecido' },
 
-  // AGE
+  // PERIOD
   ORIGINS: { en: 'Origins', pt: 'Origens', es: 'Orígenes' },
   PATRIARCHS: { en: 'Patriarchs', pt: 'Patriarcas', es: 'Patriarcas' },
   THEOCRACY: { en: 'Theocracy', pt: 'Teocracia', es: 'Teocracia' },
   KINGS: { en: 'Kings', pt: 'Reis', es: 'Reyes' },
   EXILE: { en: 'Exile', pt: 'Exílio', es: 'Exilio' },
-  REDEMPTION: { en: 'Redemption', pt: 'Redenção', es: 'Redención' },
+  GOSPEL: { en: 'Gospel', es: 'Evangelio', pt: 'Evangelho' },
+  CHURCH: { en: 'Church', es: 'Iglesia', pt: 'Igreja' },
   NT: { en: 'New Testament', es: 'Nuevo Testamento', pt: 'Novo Testamento' },
   OT: { en: 'Old Testament', es: 'Antiguo Testamento', pt: 'Antigo Testamento' },
 
