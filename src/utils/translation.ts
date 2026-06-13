@@ -160,4 +160,9 @@ export default {
     es: 'No hay características coincidentes',
     pt: 'Nenhuma característica correspondente',
   },
+  NO_MATCHING: {
+    en: 'No matches',
+    es: 'Sin coincidencias',
+    pt: 'Sem correspondências',
+  },
 }

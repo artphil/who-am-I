@@ -3,6 +3,7 @@ import type { WrongItem } from '@/utils/storage'
 import { t } from '@/utils/translate'
 
 import FeatureTag from './FeatureTag.vue'
+import CharacterFeatures from './CharacterFeatures.vue'
 
 defineProps<{
   wrongList: WrongItem[]
@@ -15,8 +16,9 @@ defineProps<{
       <li v-for="(char, index) in wrongList" :key="index">
         <h3>{{ t(char.name) }}</h3>
         <div>
-          <FeatureTag v-for="(feature, idx) in char.list" :key="idx" :text="feature" :isCorrect="false" />
           <FeatureTag v-if="!char.list.length" :text="'NO_MATCHING_FEATURES'" :isCorrect="false" />
+          <CharacterFeatures v-if="char.list.length" :title="'NO_MATCHING'" :features="char.list"
+            :correctFeatures="[]" />
         </div>
       </li>
     </ul>
@@ -24,12 +26,7 @@ defineProps<{
 </template>
 
 <style scoped>
-.fail-list {
-  padding: 20px;
-}
-
 ul {
-  margin-top: 20px;
   list-style: none;
   padding: 0;
 }
@@ -45,8 +42,7 @@ li {
 }
 
 li div {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr;
 }
 </style>

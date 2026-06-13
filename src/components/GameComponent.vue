@@ -1,3 +1,28 @@
+<template>
+  <div class="game-component">
+
+    <h3 v-if="isFinished && isWin">{{ t('GAME_OVER_SUCCESS') }}</h3>
+    <h3 v-else-if="isFinished && !isWin">{{ t('GAME_OVER_FAILURE') }} <strong>{{ correctName }}</strong></h3>
+    <span v-else>{{ t('TRIES_LEFT') }}: {{ MAX_WRONG_GUESSES - wrongList.length }} / {{ MAX_WRONG_GUESSES }}</span>
+    <NameSearch v-if="!isFinished" :nameList="names" :wordHandler="checkWord" />
+    <div v-else class="button-group">
+      <button @click="newGame">
+        <Reload /> {{ isDally ? t('TRY_AGAIN') : t('GO_DALLY') }}
+      </button>
+      <button @click="shareGame">
+        <Share /> {{ t(shareLabel) }}
+      </button>
+    </div>
+    <div class="game">
+      <CharacterPerfil v-if="correct && unknown" :correctCharacter="correct" :selectedCharacter="unknown" />
+      <FailList v-if="wrongList.length" :wrongList="wrongList" />
+    </div>
+  </div>
+  <GameStats v-if="isModalOpen" :isOpen="isModalOpen" @close="isModalOpen = false" />
+  <CharacterModal v-if="isCharacterOpen && correct && lastSelected" :correct="correct" :lastSelected="lastSelected"
+    @close="isCharacterOpen = false" />
+</template>
+
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
@@ -246,28 +271,6 @@ function newGame() {
 
 </script>
 
-<template>
-  <div class="game-component">
-    <h3 v-if="isFinished && isWin">{{ t('GAME_OVER_SUCCESS') }}</h3>
-    <h3 v-else-if="isFinished && !isWin">{{ t('GAME_OVER_FAILURE') }} <strong>{{ correctName }}</strong></h3>
-    <span v-else>{{ t('TRIES_LEFT') }}: {{ MAX_WRONG_GUESSES - wrongList.length }} / {{ MAX_WRONG_GUESSES }}</span>
-    <NameSearch v-if="!isFinished" :nameList="names" :wordHandler="checkWord" />
-    <div v-else class="button-group">
-      <button @click="newGame">
-        <Reload /> {{ isDally ? t('TRY_AGAIN') : t('GO_DALLY') }}
-      </button>
-      <button @click="shareGame">
-        <Share /> {{ t(shareLabel) }}
-      </button>
-    </div>
-    <CharacterPerfil v-if="correct && unknown" :correctCharacter="correct" :selectedCharacter="unknown" />
-    <FailList v-if="wrongList.length" :wrongList="wrongList" />
-  </div>
-  <GameStats v-if="isModalOpen" :isOpen="isModalOpen" @close="isModalOpen = false" />
-  <CharacterModal v-if="isCharacterOpen && correct && lastSelected" :correct="correct" :lastSelected="lastSelected"
-    @close="isCharacterOpen = false" />
-</template>
-
 <style scoped>
 span {
   display: block;
@@ -294,5 +297,24 @@ button {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.game-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.game {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media screen and (min-width: 768px) {
+  .game {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 </style>
