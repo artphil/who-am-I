@@ -1,3 +1,33 @@
+<template>
+  <div class="menu">
+    <button @click="openMenu" aria-label="Menu" title="Menu">
+      <Menu />
+    </button>
+    <ul v-if="showMenu" class="dropdown">
+      <li @click="openHelp">
+        <Help /> <span>{{ t('HELP_TITLE') }}</span>
+      </li>
+      <li @click="openStats">
+        <Chart /> <span>{{ t('STATS') }}</span>
+      </li>
+      <li @click="toggleHintStatus">
+        <HintIcon />
+        <span>{{ t('HINTS') }}</span>
+        <CheckIcon v-if="isHintAvailable" />
+        <CloseIcon v-else />
+      </li>
+      <li @click="openMenuLang">
+        <Language /> <span>{{ t('LANGUAGE') }}</span>
+        <ul v-if="showMenuLang" class="dropdown">
+          <li v-for="item in languages" :key="item" @click="setLang(item)">{{ t(item.toUpperCase()) }}</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <GameHelp v-if="isHelpModalOpen" :isOpen="isHelpModalOpen" @close="closeModal" />
+  <GameStats v-if="isStatspModalOpen" :isOpen="isStatspModalOpen" @close="closeModal" />
+</template>
+
 <script setup lang="ts">
 import { ref } from 'vue';
 import { aceptLanguages, t } from '@/utils/translate';
@@ -52,36 +82,6 @@ const toggleHintStatus = () => {
 }
 
 </script>
-
-<template>
-  <div class="menu">
-    <button @click="openMenu">
-      <Menu />
-    </button>
-    <ul v-if="showMenu" class="dropdown">
-      <li @click="openHelp">
-        <Help /> <span>{{ t('HELP_TITLE') }}</span>
-      </li>
-      <li @click="openStats">
-        <Chart /> <span>{{ t('STATS') }}</span>
-      </li>
-      <li @click="toggleHintStatus">
-        <HintIcon />
-        <span>{{ t('HINTS') }}</span>
-        <CheckIcon v-if="isHintAvailable" />
-        <CloseIcon v-else />
-      </li>
-      <li @click="openMenuLang">
-        <Language /> <span>{{ t('LANGUAGE') }}</span>
-        <ul v-if="showMenuLang" class="dropdown">
-          <li v-for="item in languages" :key="item" @click="setLang(item)">{{ t(item.toUpperCase()) }}</li>
-        </ul>
-      </li>
-    </ul>
-  </div>
-  <GameHelp v-if="isHelpModalOpen" :isOpen="isHelpModalOpen" @close="closeModal" />
-  <GameStats v-if="isStatspModalOpen" :isOpen="isStatspModalOpen" @close="closeModal" />
-</template>
 
 <style scoped>
 .menu {

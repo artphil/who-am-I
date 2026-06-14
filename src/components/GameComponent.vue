@@ -6,14 +6,17 @@
     <span v-else>{{ t('TRIES_LEFT') }}: {{ MAX_WRONG_GUESSES - wrongList.length }} / {{ MAX_WRONG_GUESSES }}</span>
     <div v-if="!isFinished" class="search">
       <NameSearch :nameList="names" :wordHandler="checkWord" />
-      <button v-if="isHintAvailable" @click="showHints" :title="t('HINTS')">
+      <button v-if="isHintAvailable" @click="showHints" :title="t('HINTS')" :aria-label="t('HINTS')">
         <HintIcon /> {{ hintsTotal - hintsUsed }}/{{ hintsTotal }}
       </button>
 
     </div>
     <div v-else class="button-group">
+      <button v-if="!isDally" @click="goDally">
+        <DallyIcon /> {{ t('GO_DALLY') }}
+      </button>
       <button @click="newGame">
-        <Reload /> {{ isDally ? t('TRY_AGAIN') : t('GO_DALLY') }}
+        <Reload /> {{ t('TRY_AGAIN') }}
       </button>
       <button @click="shareGame">
         <Share /> {{ t(shareLabel) }}
@@ -52,6 +55,7 @@ import Reload from '@/assets/icons/ReloadIcon.vue'
 import CharacterModal from './CharacterModal.vue'
 import HintIcon from '@/assets/icons/HintIcon.vue'
 import ConfirmMessage from './ConfirmMessage.vue'
+import DallyIcon from '@/assets/icons/DallyIcon.vue'
 
 const COPIED_LABEL_KEY = 'COPIED'
 const SHARE_LABEL_KEY = 'SHARE'
@@ -291,11 +295,12 @@ async function shareGame() {
 }
 
 function newGame() {
-  if (isDally.value) {
-    const id = getRandom()?.[CHARACTER_ID]
-    router.push('/' + id)
-    return
-  }
+  const id = getRandom()?.[CHARACTER_ID]
+  router.push('/' + id)
+  return
+}
+
+function goDally() {
   router.push('/')
 }
 

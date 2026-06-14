@@ -117,6 +117,8 @@ export default {
   MALE: { en: 'Male', es: 'Masculino', pt: 'Masculino' },
   UNKNOWN: { en: 'Unknown', es: 'Desconocido', pt: 'Desconhecido' },
 
+  CLOSE: { en: 'Close', es: 'Cerrar', pt: 'Fechar' },
+
   // PERIOD
   ORIGINS: { en: 'Origins', pt: 'Origens', es: 'Orígenes' },
   PATRIARCHS: { en: 'Patriarchs', pt: 'Patriarcas', es: 'Patriarcas' },

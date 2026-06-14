@@ -1,4 +1,25 @@
+<template>
+  <div class="modal-overlay" @click="closeModal">
+    <div class="modal-content" @click.stop>
+      <div class="modal-header" :class="color === 'correct' ? 'correct' : color === 'wrong' ? 'wrong' : ''">
+        <h2>{{ title }}</h2>
+        <button class="close-btn" @click="closeModal" :aria-label="t('CLOSE')" :title="t('CLOSE')">
+          <CloseIcon />
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <slot />
+      </div>
+    </div>
+  </div>
+</template>
+
 <script setup lang="ts">
+import CloseIcon from '@/assets/icons/CloseIcon.vue';
+import { t } from '@/utils/translate'
+
 defineProps<{
   title: string
   color?: string
@@ -12,21 +33,6 @@ function closeModal() {
   emit('close')
 }
 </script>
-
-<template>
-  <div class="modal-overlay" @click="closeModal">
-    <div class="modal-content" @click.stop>
-      <div class="modal-header" :class="color === 'correct' ? 'correct' : color === 'wrong' ? 'wrong' : ''">
-        <h2>{{ title }}</h2>
-        <button class="close-btn" @click="closeModal">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <slot />
-      </div>
-    </div>
-  </div>
-</template>
 
 <style scoped>
 .modal-overlay {
