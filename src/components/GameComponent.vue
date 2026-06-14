@@ -4,7 +4,13 @@
     <h3 v-if="isFinished && isWin">{{ t('GAME_OVER_SUCCESS') }}</h3>
     <h3 v-else-if="isFinished && !isWin">{{ t('GAME_OVER_FAILURE') }} <strong>{{ correctName }}</strong></h3>
     <span v-else>{{ t('TRIES_LEFT') }}: {{ MAX_WRONG_GUESSES - wrongList.length }} / {{ MAX_WRONG_GUESSES }}</span>
-    <NameSearch v-if="!isFinished" :nameList="names" :wordHandler="checkWord" />
+    <div v-if="!isFinished" class="search">
+      <NameSearch :nameList="names" :wordHandler="checkWord" />
+      <button v-if="isHintAvailable" @click="showHints" :title="t('HINTS')">
+        <HintIcon /> {{ hintsTotal - hintsUsed }}/{{ hintsTotal }}
+      </button>
+
+    </div>
     <div v-else class="button-group">
       <button @click="newGame">
         <Reload /> {{ isDally ? t('TRY_AGAIN') : t('GO_DALLY') }}
@@ -13,7 +19,7 @@
         <Share /> {{ t(shareLabel) }}
       </button>
     </div>
-    <div class="game">
+    <div class="game" :class="{ 'unicolumn': isFinished || wrongList.length === 0 }">
       <CharacterPerfil v-if="correct && unknown" :correctCharacter="correct" :selectedCharacter="unknown" />
       <FailList v-if="wrongList.length" :wrongList="wrongList" />
     </div>
@@ -21,6 +27,9 @@
   <GameStats v-if="isModalOpen" :isOpen="isModalOpen" @close="isModalOpen = false" />
   <CharacterModal v-if="isCharacterOpen && correct && lastSelected" :correct="correct" :lastSelected="lastSelected"
     @close="isCharacterOpen = false" />
+  <ConfirmMessage v-if="isHintsOpen" :title="'HINTS'" :message="hintMessage"
+    :confirm="hintsUsed < hintsTotal ? useHint : undefined" :cancel="() => { isHintsOpen = false; }"
+    @close="isHintsOpen = false" />
 </template>
 
 <script setup lang="ts">
@@ -41,6 +50,8 @@ import CharacterPerfil from './CharacterPerfil.vue'
 import Share from '@/assets/icons/ShareIcon.vue'
 import Reload from '@/assets/icons/ReloadIcon.vue'
 import CharacterModal from './CharacterModal.vue'
+import HintIcon from '@/assets/icons/HintIcon.vue'
+import ConfirmMessage from './ConfirmMessage.vue'
 
 const COPIED_LABEL_KEY = 'COPIED'
 const SHARE_LABEL_KEY = 'SHARE'
@@ -68,6 +79,12 @@ const isModalOpen = ref(false)
 const isCharacterOpen = ref(false)
 const shareLabel = ref(SHARE_LABEL_KEY)
 const correctFeatures = ref<string[]>([])
+const isHintAvailable = ref(false)
+const isHintsOpen = ref(false)
+const hintMessage = ref('')
+const hintsUsed = ref(0)
+const hintsTotal = ref(1)
+const reveled = ref(0)
 
 const names = characterData.map(p => t(p[CHARACTER_NAME]))
 
@@ -126,12 +143,16 @@ function initGame() {
 
   correct.value = picked
   correctFeatures.value = gameStatus.correctFeatures || []
-  unknown.value = getUnknown(picked, correctFeatures.value, gameStatus.finish)
   correctName.value = t(picked[CHARACTER_NAME])
-  wrongList.value = gameStatus.wrongList
-  isFinished.value = gameStatus.finish
-  isWin.value = gameStatus.win
-  isDally.value = gameStatus.dally
+  wrongList.value = gameStatus.wrongList || []
+  isFinished.value = gameStatus.finish || false
+  isWin.value = gameStatus.win || false
+  isDally.value = gameStatus.dally || false
+  hintsUsed.value = gameStatus.usedHints || 0
+  isHintAvailable.value = hintsUsed.value > 0 || playerStorage.getHintStatus() || false
+  hintsTotal.value = wrongList.value.length >= Math.floor(MAX_WRONG_GUESSES / 2) ? 2 : 1
+  reveled.value = gameStatus.reveled || 0
+  unknown.value = getUnknown(picked, correctFeatures.value, gameStatus.finish)
 
   lastSelected.value = gameStatus.win
     ? picked
@@ -146,6 +167,11 @@ function getUnknown(correct: Character, correctFeatures: string[], finished: boo
   }
   return Object.keys(correct).map(key => {
     if (key === CHARACTER_NAME) {
+      if (reveled.value > 0) {
+        const name = correct[CHARACTER_NAME] as string
+        const revealed = name.slice(0, reveled.value)
+        return [key, revealed + '...']
+      }
       return [key, 'UNKNOWN']
     }
     else if (key.startsWith('_')) {
@@ -198,6 +224,10 @@ function checkWord(word: string) {
 
   wrongList.value.unshift({ name: charName, list: lastSelected.value && correct.value ? getDifference(lastSelected.value, correct.value) : [] })
   playerStorage.updateGame({ wrongList: wrongList.value, correctFeatures: correctFeatures.value })
+
+  if (wrongList.value.length === Math.floor(MAX_WRONG_GUESSES / 2)) {
+    hintsTotal.value += 1
+  }
 
   if (wrongList.value.length >= MAX_WRONG_GUESSES) {
     gameOver()
@@ -269,6 +299,38 @@ function newGame() {
   router.push('/')
 }
 
+function showHints() {
+  if (isFinished.value) return
+  if (hintsUsed.value < hintsTotal.value) {
+    hintMessage.value = t('HINTS_MESSAGE')
+  } else {
+    hintMessage.value = t('NO_MORE_HINTS')
+  }
+  isHintsOpen.value = true
+}
+
+function useHint() {
+  isHintsOpen.value = false
+  if (isFinished.value) return
+  if (hintsUsed.value >= hintsTotal.value) return
+
+  const hintKeys = correct.value && unknown.value ? getDifference(correct.value, unknown.value) : []
+  console.log('hintKeys', hintKeys);
+
+  if (hintKeys.length > 0) {
+    const hint = hintKeys[Math.floor(Math.random() * hintKeys.length)] as string
+    correctFeatures.value.push(hint)
+  } else {
+    reveled.value += 1
+  }
+
+  hintsUsed.value += 1
+  unknown.value = getUnknown(correct.value as Character, correctFeatures.value, isFinished.value)
+  playerStorage.updateGame({ correctFeatures: correctFeatures.value, usedHints: hintsUsed.value, reveled: reveled.value })
+
+
+}
+
 </script>
 
 <style scoped>
@@ -293,28 +355,44 @@ span strong {
 }
 
 button {
-  min-width: 10rem;
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.final-button {
+  min-width: 10rem;
+}
+
+.search {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+  align-items: center;
 }
 
 .game-component {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 32px;
+  gap: 8px;
 }
 
 .game {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr;
   gap: 16px;
+  align-items: start;
 }
 
 @media screen and (min-width: 768px) {
   .game {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .game.unicolumn {
+    grid-template-columns: 1fr;
   }
 }
 </style>

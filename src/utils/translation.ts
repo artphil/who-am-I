@@ -20,6 +20,9 @@ export default {
   GO_DALLY: { en: 'Daily game', es: 'Juego del día', pt: 'Jogo do dia.' },
   SHARE: { en: 'Share', es: 'Compartir', pt: 'Compartilhar' },
   COPIED: { en: 'Copied', es: 'Copiado', pt: 'Copiado' },
+  HINTS: { en: 'Hints', es: 'Pistas', pt: 'Dicas' },
+  CONFIRM: { en: 'Confirm', es: 'Confirmar', pt: 'Confirmar' },
+  CANCEL: { en: 'Cancel', es: 'Cancelar', pt: 'Cancelar' },
 
   // Settings
   LANGUAGE: { en: 'Language', es: 'Idioma', pt: 'Idioma' },
@@ -164,5 +167,15 @@ export default {
     en: 'No matches',
     es: 'Sin coincidencias',
     pt: 'Sem correspondências',
+  },
+  HINTS_MESSAGE: {
+    en: 'Do you want to use a hint to reveal a characteristic of the hidden character?',
+    es: '¿Quieres usar una pista para revelar una característica del personaje oculto?',
+    pt: 'Deseja usar uma dica para revelar uma característica do personagem oculto?',
+  },
+  NO_MORE_HINTS: {
+    en: 'No more hints available.',
+    es: 'No hay más pistas disponibles.',
+    pt: 'Não há mais dicas disponíveis.',
   },
 }

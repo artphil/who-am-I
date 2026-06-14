@@ -7,6 +7,8 @@ export type PlayerData = {
   maxSequence: number
   gamesWon: number[]
   lastDate: string
+  version: string
+  hintAvailable: boolean
 }
 
 export type WrongItem = {
@@ -21,6 +23,8 @@ export type GameStatus = {
   selectedId: string
   wrongList: WrongItem[]
   correctFeatures: string[]
+  usedHints: number
+  reveled: number
 }
 
 class PlayerStorage {
@@ -33,6 +37,7 @@ class PlayerStorage {
   private readonly languageKey = 'wai_lang'
   private readonly currentKey = 'wai_current'
   private readonly dallyKey = 'wai_dally'
+  private readonly version = '' // 'H.Poirot'
   public isNew = false
 
   private constructor() {
@@ -56,6 +61,11 @@ class PlayerStorage {
       const data = JSON.parse(stored)
       if (data.lastDate !== today) {
         this.clearDallyGame()
+      }
+      if (data.version !== this.version) {
+        data.version = this.version
+        localStorage.setItem(this.storageKey, JSON.stringify(data))
+        this.isNew = true
       }
       return data
     }
@@ -87,6 +97,8 @@ class PlayerStorage {
       maxSequence: 0,
       gamesWon: new Array(MAX_WRONG_GUESSES).fill(0),
       lastDate: this.getToday(),
+      version: this.version,
+      hintAvailable: false,
     }
   }
 
@@ -126,6 +138,16 @@ class PlayerStorage {
     this.language = setLanguage(lang)
     localStorage.setItem(this.languageKey, this.language)
 
+    location.reload()
+  }
+
+  getHintStatus(): boolean {
+    return this.data.hintAvailable
+  }
+
+  setHintStatus(status: boolean): void {
+    this.data.hintAvailable = status
+    this.saveData()
     location.reload()
   }
 
@@ -170,6 +192,8 @@ class PlayerStorage {
       finish: false,
       win: false,
       correctFeatures: [],
+      usedHints: 0,
+      reveled: 0,
     }
   }
 }

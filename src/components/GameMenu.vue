@@ -8,12 +8,16 @@ import Language from '@/assets/icons/LanguageIcon.vue';
 import GameHelp from '@/components/GameHelp.vue';
 import GameStats from '@/components/GameStats.vue';
 import { playerStorage } from '../utils/storage';
+import CheckIcon from '@/assets/icons/CheckIcon.vue';
+import CloseIcon from '@/assets/icons/CloseIcon.vue';
+import HintIcon from '@/assets/icons/HintIcon.vue';
 
 const isHelpModalOpen = ref(playerStorage.isNew);
 const isStatspModalOpen = ref(false);
 const showMenu = ref(false);
 const showMenuLang = ref(false);
 const languages = aceptLanguages
+const isHintAvailable = ref(playerStorage.getHintStatus())
 
 const openMenu = () => {
   showMenu.value = !showMenu.value;
@@ -41,6 +45,12 @@ const closeModal = () => {
   isHelpModalOpen.value = false;
   isStatspModalOpen.value = false;
 };
+
+const toggleHintStatus = () => {
+  isHintAvailable.value = !isHintAvailable.value;
+  playerStorage.setHintStatus(isHintAvailable.value);
+}
+
 </script>
 
 <template>
@@ -55,12 +65,17 @@ const closeModal = () => {
       <li @click="openStats">
         <Chart /> <span>{{ t('STATS') }}</span>
       </li>
+      <li @click="toggleHintStatus">
+        <HintIcon />
+        <span>{{ t('HINTS') }}</span>
+        <CheckIcon v-if="isHintAvailable" />
+        <CloseIcon v-else />
+      </li>
       <li @click="openMenuLang">
         <Language /> <span>{{ t('LANGUAGE') }}</span>
         <ul v-if="showMenuLang" class="dropdown">
           <li v-for="item in languages" :key="item" @click="setLang(item)">{{ t(item.toUpperCase()) }}</li>
         </ul>
-
       </li>
     </ul>
   </div>
