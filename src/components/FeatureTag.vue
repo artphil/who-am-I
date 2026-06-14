@@ -2,7 +2,7 @@
   <span :class="['tag', isCorrect ? 'tag--correct' : 'tag--incorrect']">
     <CheckIcon v-if="isCorrect" :aria-label="t('correct')" />
     <CloseIcon v-else :aria-label="t('incorrect')" />
-    {{ t(text) }}
+    {{ t('FEATURE.' + text) }}
   </span>
 </template>
 

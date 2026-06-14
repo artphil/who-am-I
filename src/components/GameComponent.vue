@@ -1,25 +1,27 @@
 <template>
   <div class="game-component">
 
-    <h3 v-if="isFinished && isWin">{{ t('GAME_OVER_SUCCESS') }}</h3>
-    <h3 v-else-if="isFinished && !isWin">{{ t('GAME_OVER_FAILURE') }} <strong>{{ correctName }}</strong></h3>
-    <span v-else>{{ t('TRIES_LEFT') }}: {{ MAX_WRONG_GUESSES - wrongList.length }} / {{ MAX_WRONG_GUESSES }}</span>
+    <h3 v-if="isFinished && isWin">{{ t('MESSAGE.GAME_OVER_SUCCESS') }}</h3>
+    <h3 v-else-if="isFinished && !isWin">{{ t('MESSAGE.GAME_OVER_FAILURE') }} <strong>{{ correctName }}</strong></h3>
+    <span v-else>{{ t('MESSAGE.TRIES_LEFT') }}: {{ MAX_WRONG_GUESSES - wrongList.length }} / {{ MAX_WRONG_GUESSES
+    }}</span>
     <div v-if="!isFinished" class="search">
       <NameSearch :nameList="names" :wordHandler="checkWord" />
-      <button v-if="isHintAvailable" @click="showHints" :title="t('HINTS')" :aria-label="t('HINTS')">
+      <button v-if="isHintAvailable" @click="showHints" :title="t('MESSAGE.HINTS_TITLE')"
+        :aria-label="t('MESSAGE.HINTS_TITLE')">
         <HintIcon /> {{ hintsTotal - hintsUsed }}/{{ hintsTotal }}
       </button>
 
     </div>
     <div v-else class="button-group">
       <button v-if="!isDally" @click="goDally">
-        <DallyIcon /> {{ t('GO_DALLY') }}
+        <DallyIcon /> {{ t('MESSAGE.GO_DALLY') }}
       </button>
       <button @click="newGame">
-        <Reload /> {{ t('TRY_AGAIN') }}
+        <Reload /> {{ t('MESSAGE.TRY_AGAIN') }}
       </button>
       <button @click="shareGame">
-        <Share /> {{ t(shareLabel) }}
+        <Share /> {{ t('MESSAGE.SHARE') }}
       </button>
     </div>
     <div class="game" :class="{ 'unicolumn': isFinished || wrongList.length === 0 }">
@@ -30,7 +32,7 @@
   <GameStats v-if="isModalOpen" :isOpen="isModalOpen" @close="isModalOpen = false" />
   <CharacterModal v-if="isCharacterOpen && correct && lastSelected" :correct="correct" :lastSelected="lastSelected"
     @close="isCharacterOpen = false" />
-  <ConfirmMessage v-if="isHintsOpen" :title="'HINTS'" :message="hintMessage"
+  <ConfirmMessage v-if="isHintsOpen" :title="t('MESSAGE.HINTS_TITLE')" :message="hintMessage"
     :confirm="hintsUsed < hintsTotal ? useHint : undefined" :cancel="() => { isHintsOpen = false; }"
     @close="isHintsOpen = false" />
 </template>
@@ -90,7 +92,7 @@ const hintsUsed = ref(0)
 const hintsTotal = ref(1)
 const reveled = ref(0)
 
-const names = characterData.map(p => t(p[CHARACTER_NAME]))
+const names = characterData.map(p => t('CHARACTER.' + p[CHARACTER_NAME]))
 
 
 // executar inicialização
@@ -147,7 +149,7 @@ function initGame() {
 
   correct.value = picked
   correctFeatures.value = gameStatus.correctFeatures || []
-  correctName.value = t(picked[CHARACTER_NAME])
+  correctName.value = t('CHARACTER.' + picked[CHARACTER_NAME])
   wrongList.value = gameStatus.wrongList || []
   isFinished.value = gameStatus.finish || false
   isWin.value = gameStatus.win || false
@@ -206,7 +208,7 @@ function checkWord(word: string) {
   if (!word.trim()) return
   if (!names.includes(word)) return
 
-  lastSelected.value = characterData.find(p => t(p[CHARACTER_NAME]) === word) || null
+  lastSelected.value = characterData.find(p => t('CHARACTER.' + p[CHARACTER_NAME]) === word) || null
   const charName = lastSelected.value?.[CHARACTER_NAME] || ''
 
   if (charName && wrongList.value.some(item => item.name === charName)) return
@@ -281,8 +283,8 @@ async function shareGame() {
   const baseUrl = 'https://artphil.github.io/who-am-I/'
   const guesses = wrongList.value.length
   await navigator.clipboard.writeText(
-    t('SHARE_MESSAGE', [
-      t('GAME_TITLE'),
+    t('MESSAGE.SHARE_MESSAGE', [
+      t('MESSAGE.GAME_TITLE'),
       (playerStorage.getGame()?.win ? guesses + 1 : "X").toString(),
       MAX_WRONG_GUESSES.toString(),
       baseUrl // url
@@ -307,9 +309,9 @@ function goDally() {
 function showHints() {
   if (isFinished.value) return
   if (hintsUsed.value < hintsTotal.value) {
-    hintMessage.value = t('HINTS_MESSAGE')
+    hintMessage.value = 'MESSAGE.HINTS_MESSAGE'
   } else {
-    hintMessage.value = t('NO_MORE_HINTS')
+    hintMessage.value = 'MESSAGE.NO_MORE_HINTS'
   }
   isHintsOpen.value = true
 }

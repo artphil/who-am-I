@@ -61,7 +61,7 @@ function closeDropdown() {
 
     <ul v-show="showDropdown && searchQuery" class="dropdown">
       <li v-if="!filteredNames.length">
-        {{ t('NOT_FOUND') }}
+        {{ t('MESSAGE.NOT_FOUND') }}
       </li>
       <li v-for="name in filteredNames" :key="name" @mousedown.prevent="selectName(name)">
         {{ name }}

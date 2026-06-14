@@ -15,7 +15,7 @@ const isCorrect = (value: string) => {
 
 <template>
   <div class="attribute">
-    <span class="attribute-label">{{ t(title.toUpperCase()) }}:</span>
+    <span class="attribute-label">{{ t('FEATURE.' + title.toUpperCase()) }}:</span>
     <div class="attribute-container">
       <FeatureTag v-for="(value, key) in features" :key="key" :text="value" :isCorrect="isCorrect(value)" />
     </div>

@@ -8,19 +8,19 @@ import GameModal from './GameModal.vue'
   <GameModal :title="t('HELP_TITLE')">
 
     <div class="group-info">
-      <p>{{ t('HELP_STEP_1') }}</p>
-      <p>{{ t('HELP_STEP_2') }}</p>
-      <p>{{ t('HELP_STEP_3') }}</p>
+      <p>{{ t('MESSAGE.HELP_STEP_1') }}</p>
+      <p>{{ t('MESSAGE.HELP_STEP_2') }}</p>
+      <p>{{ t('MESSAGE.HELP_STEP_3') }}</p>
     </div>
 
     <div class="group-info">
       <PersonFeatures :title="'FEEDBACK'" :features="['CORRECT', 'WRONG']" :correctFeatures="['CORRECT']" />
-      <p>{{ t('CORRECT') }} → {{ t('HELP_CORRECT') }}</p>
-      <p>{{ t('WRONG') }} → {{ t('HELP_WRONG') }}</p>
+      <p>{{ t('FEATURE.CORRECT') }} → {{ t('MESSAGE.HELP_CORRECT') }}</p>
+      <p>{{ t('FEATURE.WRONG') }} → {{ t('MESSAGE.HELP_WRONG') }}</p>
     </div>
 
     <div class="group-info">
-      <p>{{ t('HELP_TARGET') }}</p>
+      <p>{{ t('MESSAGE.HELP_TARGET') }}</p>
 
     </div>
 

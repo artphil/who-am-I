@@ -28,7 +28,7 @@ const hoveredBar = ref<number | null>(null)
 
 <template>
   <div class="chart-container">
-    <h3>{{ t(title) }}</h3>
+    <h3>{{ t('MESSAGE.' + title) }}</h3>
     <svg :viewBox="`0 0 ${chartWidth} ${chartHeight}`" class="chart">
       <!-- Eixo Y -->
       <line x1="40" y1="20" x2="40" y2="280" stroke-width="2" />

@@ -4,9 +4,9 @@ import { t } from '../utils/translate';
 
 <template>
   <div class="title-container">
-    <h1 class="title">{{ t('GAME_TITLE') }}</h1>
+    <h1 class="title">{{ t('MESSAGE.GAME_TITLE') }}</h1>
     <div class="wrapper">
-      <p class="description"> {{ t('GAME_DESCRIPTION') }} </p>
+      <p class="description"> {{ t('DESCRIPTION.GAME') }} </p>
     </div>
   </div>
 </template>

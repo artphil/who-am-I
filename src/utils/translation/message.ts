@@ -1,36 +1,13 @@
 export default {
-  // Game UI
-  GAME_TITLE: { en: 'Who Am I?', es: '¿Quién Soy?', pt: 'Quem Sou Eu?' },
-  GAME_DESCRIPTION: {
-    en: 'Guess the character based on their traits.',
-    es: 'Adivina el personaje basado en sus características.',
-    pt: 'Adivinhe o personagem com base em suas características.',
-  },
-  UNKNOWN_DESCRIPTION: {
-    en: 'Guess who I am based on my traits.',
-    es: 'Adivina quién soy basado en mis características.',
-    pt: 'Adivinhe quem eu sou com base em minhas características.',
-  },
-  INPUT_PLACEHOLDER: {
-    en: 'Type a name.',
-    es: 'Escribe un nombre.',
-    pt: 'Digite um nome.',
-  },
-  TRY_AGAIN: { en: 'New Game', es: 'Nuevo Juego', pt: 'Novo Jogo' },
-  GO_DALLY: { en: 'Daily game', es: 'Juego del día', pt: 'Jogo do dia.' },
-  SHARE: { en: 'Share', es: 'Compartir', pt: 'Compartilhar' },
-  COPIED: { en: 'Copied', es: 'Copiado', pt: 'Copiado' },
-  HINTS: { en: 'Hints', es: 'Pistas', pt: 'Dicas' },
-  CONFIRM: { en: 'Confirm', es: 'Confirmar', pt: 'Confirmar' },
-  CANCEL: { en: 'Cancel', es: 'Cancelar', pt: 'Cancelar' },
-
-  // Settings
-  LANGUAGE: { en: 'Language', es: 'Idioma', pt: 'Idioma' },
-  EN: { en: 'English', es: 'Inglés', pt: 'Inglês' },
-  ES: { en: 'Spanish', es: 'Español', pt: 'Espanhol' },
-  PT: { en: 'Portuguese', es: 'Portugués', pt: 'Português' },
-
   // Game Help
+  GAME_TITLE: { en: 'Who Am I?', es: '¿Quién Soy?', pt: 'Quem Sou Eu?' },
+
+  INPUT_PLACEHOLDER: {
+    en: 'Type the character name.',
+    es: 'Escribe el nombre del personaje.',
+    pt: 'Digite o nome do personagem.',
+  },
+
   HELP_TITLE: { en: 'How to Play', es: 'Cómo jugar', pt: 'Como Jogar' },
 
   HELP_STEP_1: {
@@ -65,9 +42,6 @@ export default {
     es: 'Adivina el personaje en el menor número de intentos.',
     pt: 'Acerte o personagem no menor número de tentativas.',
   },
-  CORRECT: { en: 'Correct', es: 'Correcto', pt: 'Correto' },
-  WRONG: { en: 'Wrong', es: 'Incorrecto', pt: 'Errado' },
-  FEEDBACK: { en: 'Feedback', es: 'Feedback', pt: 'Feedback' },
 
   // Game Stats
   STATS: {
@@ -147,6 +121,7 @@ export default {
     es: '🔍**{0}**🔎\nHice {1}/{2} en el juego de hoy.\n¡Juega tú también!!\n{3}',
     pt: '🔍**{0}**🔎\nEu fiz {1}/{2} no jogo de hoje.\nJogue você também!!\n{3}',
   },
+
   // Not Found
   NOT_FOUND_PAGE: {
     en: 'Page not found',
@@ -158,16 +133,10 @@ export default {
     es: 'Volver al inicio',
     pt: 'Voltar para o início',
   },
-  NO_MATCHING_FEATURES: {
-    en: 'No matching features',
-    es: 'No hay características coincidentes',
-    pt: 'Nenhuma característica correspondente',
-  },
-  NO_MATCHING: {
-    en: 'No matches',
-    es: 'Sin coincidencias',
-    pt: 'Sem correspondências',
-  },
+
+  // Hints
+  HINTS_TITLE: { en: 'Hints', es: 'Pistas', pt: 'Dicas' },
+
   HINTS_MESSAGE: {
     en: 'Do you want to use a hint to reveal a characteristic of the hidden character?',
     es: '¿Quieres usar una pista para revelar una característica del personaje oculto?',

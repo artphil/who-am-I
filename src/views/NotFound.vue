@@ -12,10 +12,10 @@ function goHome() {
 <template>
   <div class="not-found">
     <h1>404</h1>
-    <p>{{ t('NOT_FOUND_PAGE') }}</p>
+    <p>{{ t('MESSAGE.NOT_FOUND_PAGE') }}</p>
 
     <button @click="goHome">
-      {{ t('BACK_HOME') }}
+      {{ t('MESSAGE.BACK_HOME') }}
     </button>
   </div>
 </template>

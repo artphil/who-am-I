@@ -23,7 +23,7 @@ function getFeatures(character: Character): Record<string, string[]> {
   <div class="character-perfil">
     <div class="perfil-header">
       <!-- <div v-if="selectedCharacter.image" class="perfil-image">        <img :src="selectedCharacter.image" :alt="selectedCharacter[CHARACTER_NAME]" />      </div> -->
-      <h2>{{ t(selectedCharacter[CHARACTER_NAME]) }}</h2>
+      <h2>{{ t('CHARACTER.' + selectedCharacter[CHARACTER_NAME]) }}</h2>
     </div>
 
     <div class="perfil-content">

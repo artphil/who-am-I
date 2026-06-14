@@ -21,7 +21,7 @@ function getColor(): string {
 
 function getTitle(): string {
   const key = isCorrect() ? 'CHARACTER_CORRECT' : 'CHARACTER_WRONG'
-  return t(key)
+  return t('MESSAGE.' + key)
 }
 
 </script>

@@ -5,21 +5,21 @@
     </button>
     <ul v-if="showMenu" class="dropdown">
       <li @click="openHelp">
-        <Help /> <span>{{ t('HELP_TITLE') }}</span>
+        <Help /> <span>{{ t('MESSAGE.HELP_TITLE') }}</span>
       </li>
       <li @click="openStats">
-        <Chart /> <span>{{ t('STATS') }}</span>
+        <Chart /> <span>{{ t('MESSAGE.STATS') }}</span>
       </li>
       <li @click="toggleHintStatus">
         <HintIcon />
-        <span>{{ t('HINTS') }}</span>
+        <span>{{ t('MESSAGE.HINTS_TITLE') }}</span>
         <CheckIcon v-if="isHintAvailable" />
         <CloseIcon v-else />
       </li>
       <li @click="openMenuLang">
-        <Language /> <span>{{ t('LANGUAGE') }}</span>
+        <Language /> <span>{{ t('SYSTEM.LANGUAGE') }}</span>
         <ul v-if="showMenuLang" class="dropdown">
-          <li v-for="item in languages" :key="item" @click="setLang(item)">{{ t(item.toUpperCase()) }}</li>
+          <li v-for="item in languages" :key="item" @click="setLang(item)">{{ t('SYSTEM.' + item.toUpperCase()) }}</li>
         </ul>
       </li>
     </ul>
@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { aceptLanguages, t } from '@/utils/translate';
+import { acceptLanguages, t } from '@/utils/translate';
 import Help from '@/assets/icons/HelpIcon.vue'
 import Chart from '@/assets/icons/ChartIcon.vue';
 import Menu from '@/assets/icons/MenuIcon.vue';
@@ -46,7 +46,7 @@ const isHelpModalOpen = ref(playerStorage.isNew);
 const isStatspModalOpen = ref(false);
 const showMenu = ref(false);
 const showMenuLang = ref(false);
-const languages = aceptLanguages
+const languages = acceptLanguages
 const isHintAvailable = ref(playerStorage.getHintStatus())
 
 const openMenu = () => {

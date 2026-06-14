@@ -13,14 +13,14 @@ defineProps<{
 </script>
 
 <template>
-  <GameModal :title="t(title)">
-    <p class="message">{{ t(message) }}</p>
+  <GameModal :title="t('MESSAGE.' + title)">
+    <p class="message">{{ t('MESSAGE.' + message) }}</p>
     <div class="button-group">
       <button v-if="confirm" class="action-button confirm" @click="confirm">
-        <CheckIcon /> {{ t('CONFIRM') }}
+        <CheckIcon /> {{ t('SYSTEM.CONFIRM') }}
       </button>
       <button v-if="cancel" class="action-button cancel" @click="cancel">
-        <CloseIcon /> {{ t('CANCEL') }}
+        <CloseIcon /> {{ t('SYSTEM.CANCEL') }}
       </button>
     </div>
   </GameModal>
