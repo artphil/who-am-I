@@ -46,7 +46,7 @@ defineProps<{
   padding: 10px 20px;
   border: none;
   border-radius: var(--border-radius);
-  color: var(--color-text);
+  color: var(--color-heading);
   font-weight: 700;
   font-size: 1rem;
   cursor: pointer;
