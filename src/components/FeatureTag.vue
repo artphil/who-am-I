@@ -1,9 +1,12 @@
 <template>
-  <span :class="['tag', isCorrect ? 'tag--correct' : 'tag--incorrect']">
-    <CheckIcon v-if="isCorrect" :aria-label="t('correct')" />
-    <CloseIcon v-else :aria-label="t('incorrect')" />
-    {{ t('FEATURE.' + text) }}
-  </span>
+  <div :class="['tag', isCorrect ? 'tag--correct' : 'tag--incorrect']">
+    <CheckIcon class="icon" v-if="isCorrect" :aria-label="t('correct')" />
+    <CloseIcon class="icon" v-else :aria-label="t('incorrect')" />
+
+    <span>
+      {{ t('FEATURE.' + text) }}
+    </span>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -28,18 +31,26 @@ defineProps({
 
   display: flex;
   align-items: center;
-  gap: 4px;
-  padding: 0.25rem 0.75rem;
+
   border-radius: var(--border-radius);
+  border: 2px solid var(--tag-color);
+  background-color: var(--color-background-modal);
+}
+
+.tag span {
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
   font-size: 0.875rem;
   font-weight: 700;
-  border: 2px solid var(--tag-color);
-  background-color: var(--color-background-cards);
   color: var(--tag-color);
 }
 
-.tag svg {
-  fill: var(--tag-color);
+.tag .icon {
+  background-color: var(--tag-color);
+  height: 100%;
+  fill: var(--color-background-modal);
+
 }
 
 .tag--correct {
