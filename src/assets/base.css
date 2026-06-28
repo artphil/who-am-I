@@ -37,6 +37,9 @@
 
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
+  --color-link: var(--vt-c-green);
+  --color-link-hover: var(--vt-c-indigo);
+  --color-link-hover-background: var(--vt-c-divider-light-1);
 
   --color-scrollbar-track: transparent;
   --color-scrollbar-thumb: var(--color-divider);
@@ -62,6 +65,8 @@
 
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
+    --color-link-hover: var(--vt-c-white);
+    --color-link-hover-background: var(--vt-c-divider-dark-2);
 
     --color-scrollbar-thumb: var(--color-divider);
     --color-scrollbar-thumb-hover: var(--color-border-hover);

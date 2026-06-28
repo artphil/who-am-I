@@ -28,6 +28,9 @@
       <CharacterPerfil v-if="correct && unknown" :correctCharacter="correct" :selectedCharacter="unknown" />
       <FailList v-if="wrongList.length" :wrongList="wrongList" />
     </div>
+    <div class="footer">
+      by <a href="https://artphil.github.io/" target="_blank" rel="noopener noreferrer">Artphil</a>
+    </div>
   </div>
   <GameStats v-if="isModalOpen" :isOpen="isModalOpen" @close="isModalOpen = false" />
   <CharacterModal v-if="isCharacterOpen && correct && lastSelected" :correct="correct" :lastSelected="lastSelected"
@@ -391,6 +394,21 @@ button {
   grid-template-columns: 1fr;
   gap: 16px;
   align-items: start;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid var(--color-divider);
+  padding: 16px;
+  width: 100%;
+  font-size: 0.8rem;
+  color: var(--color-text);
+}
+
+.footer a {
+  font-weight: bold;
 }
 
 @media screen and (min-width: 768px) {
