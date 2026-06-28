@@ -3,7 +3,7 @@
     <h3 v-if="isFinished && isWin">{{ t('MESSAGE.GAME_OVER_SUCCESS') }}</h3>
     <h3 v-else-if="isFinished && !isWin">{{ t('MESSAGE.GAME_OVER_FAILURE') }} <strong>{{ correctName }}</strong></h3>
     <span v-else>{{ t('MESSAGE.TRIES_LEFT') }}: {{ MAX_WRONG_GUESSES - wrongList.length }} / {{ MAX_WRONG_GUESSES
-      }}</span>
+    }}</span>
     <div v-if="!isFinished" class="search">
       <NameSearch :nameList="names" :wordHandler="checkWord" />
       <button v-if="isHintAvailable" @click="showHints" :title="t('MESSAGE.HINTS_TITLE')"
@@ -24,7 +24,8 @@
       </button>
     </div>
     <div class="game" :class="{ 'unicolumn': isFinished || wrongList.length === 0 }">
-      <CharacterPerfil v-if="correct && unknown" :correctCharacter="correct" :selectedCharacter="unknown" />
+      <CharacterPerfil v-if="correct && unknown" :correctCharacter="correct" :selectedCharacter="unknown"
+        :showDescription="true" />
       <FailList v-if="wrongList.length" :wrongList="wrongList" />
     </div>
   </div>
