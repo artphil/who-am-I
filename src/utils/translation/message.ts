@@ -3,9 +3,9 @@ export default {
   GAME_TITLE: { en: 'Who Am I?', es: '¿Quién Soy?', pt: 'Quem Sou Eu?' },
 
   INPUT_PLACEHOLDER: {
-    en: 'Type the character name.',
-    es: 'Escribe el nombre del personaje.',
-    pt: 'Digite o nome do personagem.',
+    en: 'Type your guess here.',
+    es: 'Escribe tu respuesta aquí.',
+    pt: 'Digite seu palpite aqui.',
   },
 
   HELP_TITLE: { en: 'How to Play', es: 'Cómo jugar', pt: 'Como Jogar' },

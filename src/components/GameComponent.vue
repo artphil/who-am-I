@@ -2,15 +2,14 @@
   <div class="game-component">
     <h3 v-if="isFinished && isWin">{{ t('MESSAGE.GAME_OVER_SUCCESS') }}</h3>
     <h3 v-else-if="isFinished && !isWin">{{ t('MESSAGE.GAME_OVER_FAILURE') }} <strong>{{ correctName }}</strong></h3>
-    <span v-else>{{ t('MESSAGE.TRIES_LEFT') }}: {{ MAX_WRONG_GUESSES - wrongList.length }} / {{ MAX_WRONG_GUESSES
-    }}</span>
+    <span v-else>{{ t('MESSAGE.TRIES_LEFT') }}: {{ MAX_WRONG_GUESSES - wrongList.length }} / {{
+      MAX_WRONG_GUESSES }}</span>
     <div v-if="!isFinished" class="search">
       <NameSearch :nameList="names" :wordHandler="checkWord" />
       <button v-if="isHintAvailable" @click="showHints" :title="t('MESSAGE.HINTS_TITLE')"
         :aria-label="t('MESSAGE.HINTS_TITLE')">
         <HintIcon /> {{ hintsTotal - hintsUsed }}/{{ hintsTotal }}
       </button>
-
     </div>
     <div v-else class="button-group">
       <button v-if="!isDally" @click="goDally">
@@ -309,9 +308,9 @@ function goDally() {
 function showHints() {
   if (isFinished.value) return
   if (hintsUsed.value < hintsTotal.value) {
-    hintMessage.value = 'MESSAGE.HINTS_MESSAGE'
+    hintMessage.value = 'HINTS_MESSAGE'
   } else {
-    hintMessage.value = 'MESSAGE.NO_MORE_HINTS'
+    hintMessage.value = 'NO_MORE_HINTS'
   }
   isHintsOpen.value = true
 }
@@ -376,6 +375,10 @@ button {
   width: 100%;
   gap: 8px;
   align-items: center;
+}
+
+.search svg {
+  fill: var(--color-hint);
 }
 
 .game-component {
