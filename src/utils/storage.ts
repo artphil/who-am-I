@@ -84,7 +84,11 @@ class PlayerStorage {
     const stored = localStorage.getItem(this.currentKey)
     if (stored) {
       const current = JSON.parse(stored)
-      localStorage.setItem(this.currentKey, JSON.stringify({ ...current, dally: false }))
+      if (current.wrongList.length > 0 || current.correctFeatures.length > 0) {
+        localStorage.setItem(this.currentKey, JSON.stringify({ ...current, dally: false }))
+      } else {
+        localStorage.removeItem(this.currentKey)
+      }
     }
     localStorage.removeItem(this.dallyKey)
   }
