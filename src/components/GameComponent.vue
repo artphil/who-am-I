@@ -1,6 +1,5 @@
 <template>
   <div class="game-component">
-
     <h3 v-if="isFinished && isWin">{{ t('MESSAGE.GAME_OVER_SUCCESS') }}</h3>
     <h3 v-else-if="isFinished && !isWin">{{ t('MESSAGE.GAME_OVER_FAILURE') }} <strong>{{ correctName }}</strong></h3>
     <span v-else>{{ t('MESSAGE.TRIES_LEFT') }}: {{ MAX_WRONG_GUESSES - wrongList.length }} / {{ MAX_WRONG_GUESSES
@@ -27,9 +26,6 @@
     <div class="game" :class="{ 'unicolumn': isFinished || wrongList.length === 0 }">
       <CharacterPerfil v-if="correct && unknown" :correctCharacter="correct" :selectedCharacter="unknown" />
       <FailList v-if="wrongList.length" :wrongList="wrongList" />
-    </div>
-    <div class="footer">
-      by <a href="https://artphil.github.io/" target="_blank" rel="noopener noreferrer">Artphil</a>
     </div>
   </div>
   <GameStats v-if="isModalOpen" :isOpen="isModalOpen" @close="isModalOpen = false" />
@@ -383,9 +379,11 @@ button {
 
 .game-component {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
   gap: 8px;
+  width: 100%;
 }
 
 .game {
@@ -394,21 +392,6 @@ button {
   grid-template-columns: 1fr;
   gap: 16px;
   align-items: start;
-}
-
-.footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-top: 1px solid var(--color-divider);
-  padding: 16px;
-  width: 100%;
-  font-size: 0.8rem;
-  color: var(--color-text);
-}
-
-.footer a {
-  font-weight: bold;
 }
 
 @media screen and (min-width: 768px) {
