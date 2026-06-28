@@ -31,7 +31,7 @@
   <GameStats v-if="isModalOpen" :isOpen="isModalOpen" @close="isModalOpen = false" />
   <CharacterModal v-if="isCharacterOpen && correct && lastSelected" :correct="correct" :lastSelected="lastSelected"
     @close="isCharacterOpen = false" />
-  <ConfirmMessage v-if="isHintsOpen" :title="t('MESSAGE.HINTS_TITLE')" :message="hintMessage"
+  <ConfirmMessage v-if="isHintsOpen" :title="'HINTS_TITLE'" :message="hintMessage"
     :confirm="hintsUsed < hintsTotal ? useHint : undefined" :cancel="() => { isHintsOpen = false; }"
     @close="isHintsOpen = false" />
 </template>
