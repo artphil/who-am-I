@@ -11,6 +11,7 @@
   --vt-c-indigo: #2c3e50;
   --vt-c-green: #00c389;
   --vt-c-red: #c22a00;
+  --vt-c-yellow: #e6b800;
 
   --vt-c-divider-light-1: rgba(0, 0, 0, 0.1);
   --vt-c-divider-light-2: rgba(0, 0, 0, 0.16);
@@ -47,6 +48,7 @@
 
   --color-correct: var(--vt-c-green);
   --color-wrong: var(--vt-c-red);
+  --color-hint: var(--vt-c-yellow);
 
   --section-gap: 32px;
 
@@ -102,7 +104,7 @@ body {
     'Droid Sans',
     'Helvetica Neue',
     sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
