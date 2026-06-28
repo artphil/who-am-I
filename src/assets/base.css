@@ -38,6 +38,10 @@
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
 
+  --color-scrollbar-track: transparent;
+  --color-scrollbar-thumb: var(--color-divider);
+  --color-scrollbar-thumb-hover: var(--color-border-hover);
+
   --color-correct: var(--vt-c-green);
   --color-wrong: var(--vt-c-red);
 
@@ -58,6 +62,9 @@
 
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
+
+    --color-scrollbar-thumb: var(--color-divider);
+    --color-scrollbar-thumb-hover: var(--color-border-hover);
   }
 }
 
@@ -94,6 +101,29 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar-track);
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--color-scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--color-scrollbar-thumb);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-scrollbar-thumb-hover);
 }
 
 h1,

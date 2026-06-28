@@ -7,9 +7,7 @@
           <CloseIcon />
         </button>
       </div>
-
       <div class="modal-body">
-
         <slot />
       </div>
     </div>
@@ -42,10 +40,13 @@ function closeModal() {
   left: 0;
   right: 0;
   bottom: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
   z-index: 1000;
 }
 
@@ -53,9 +54,11 @@ function closeModal() {
   background: var(--color-background-modal);
   border-radius: var(--border-radius);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
   max-width: 600px;
   width: 90%;
-  overflow: hidden;
+  max-height: 90vh;
 }
 
 .modal-header {
@@ -76,6 +79,8 @@ function closeModal() {
 
 .modal-body {
   padding: 20px;
+  overflow-y: auto;
+  min-height: 0;
 }
 
 .correct {
