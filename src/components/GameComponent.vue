@@ -19,7 +19,7 @@
         <Reload /> {{ t('SYSTEM.TRY_AGAIN') }}
       </button>
       <button @click="shareGame">
-        <Share /> {{ t('SYSTEM.SHARE') }}
+        <Share /> {{ t('SYSTEM.' + shareLabel) }}
       </button>
     </div>
     <div class="game" :class="{ 'unicolumn': isFinished || wrongList.length === 0 }">
@@ -281,17 +281,23 @@ async function shareGame() {
 
   const baseUrl = 'https://artphil.github.io/who-am-I/'
   const guesses = wrongList.value.length
+  const hints = hintsUsed.value
+  const score = 100 - (guesses * 10) - (hints * 5)
+  const game = playerStorage.getGame()
+
   await navigator.clipboard.writeText(
     t('MESSAGE.SHARE_MESSAGE', [
       t('MESSAGE.GAME_TITLE'),
-      (playerStorage.getGame()?.win ? guesses + 1 : "X").toString(),
+      score.toString(),
+      (game?.dally ? t('DALLY') : t('RANDOM')),
+      (game?.win ? guesses + 1 : guesses).toString(),
       MAX_WRONG_GUESSES.toString(),
-      baseUrl // url
+      hints.toString(),
+      baseUrl
     ])
   )
 
-  const newLocal = COPIED_LABEL_KEY
-  shareLabel.value = newLocal
+  shareLabel.value = COPIED_LABEL_KEY
   setTimeout(() => (shareLabel.value = SHARE_LABEL_KEY), DEFAULT_UI_DELAY)
 }
 

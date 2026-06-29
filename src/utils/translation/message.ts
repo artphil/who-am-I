@@ -60,9 +60,9 @@ export default {
     pt: 'Sequência atual',
   },
   MAX_SEQ: {
-    en: 'Max streak',
-    es: 'Racha máxima',
-    pt: 'Sequência máxima',
+    en: 'Longest streak',
+    es: 'Racha más larga',
+    pt: 'Maior sequência',
   },
   TOTAL_GAMES: {
     en: 'Total Games',
@@ -116,10 +116,22 @@ export default {
     es: 'Lo sentimos, este personaje no está en nuestra lista.',
     pt: 'Desculpe, este personagem não está na nossa lista.',
   },
+
+  // SHARE
   SHARE_MESSAGE: {
-    en: "🔍**{0}**🔎\nI made {1}/{2} in today's game.\nPlay too!!\n{3}",
-    es: '🔍**{0}**🔎\nHice {1}/{2} en el juego de hoy.\n¡Juega tú también!!\n{3}',
-    pt: '🔍**{0}**🔎\nEu fiz {1}/{2} no jogo de hoje.\nJogue você também!!\n{3}',
+    en: '🔍 **{0}** 🔎\nI scored {1} points in {2} mode.\nUsing {3}/{4} guesses and {5} hints.\nPlay it too!!\n{6}',
+    es: '🔍 **{0}** 🔎\nHice {1} puntos en el modo {2}.\nUsando {3}/{4} intentos y {5} pistas.\n¡Juega tú también!\n{6}',
+    pt: '🔍 **{0}** 🔎\nFiz {1} pontos no modo {2}.\nUsando {3}/{4} palpites e {5} dicas.\nJogue você também!!\n{6}',
+  },
+  DALLY: {
+    en: 'Daily',
+    es: 'Diario',
+    pt: 'Diário',
+  },
+  RANDOM: {
+    en: 'Random',
+    es: 'Aleatorio',
+    pt: 'Aleatório',
   },
 
   // Not Found
